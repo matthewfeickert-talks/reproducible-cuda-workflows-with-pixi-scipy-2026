@@ -1,7 +1,7 @@
 # See docs at: https://mystmd.org/guide/frontmatter
 version: 1
 project:
-  id: 4f62f83b-dbc0-4784-9550-b67b1a244538
+  id: a5b4cca9-175f-4c5c-ba9e-c06959a735b8
   title: Reproducible CUDA Accelerated Workflows for Scientists with Pixi
   description: |
     Scientific researchers need reproducible software environments for complex applications that can run across heterogeneous computing platforms.
