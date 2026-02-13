@@ -28,11 +28,11 @@ project:
       github: ruben-arts
 
     - name: "Katrina Riehl"
-      id: nv-kriehl
+      id: katrina-riehl
       affiliations:
         - id: nvidia
           institution: NVIDIA
-      github: jakirkham
+      github: nv-kriehl
   github: https://matthewfeickert-talks.github.io/reproducible-cuda-workflows-with-pixi-scipy-2026/
   abbreviations:
     CLI : "Command Line Interface"
