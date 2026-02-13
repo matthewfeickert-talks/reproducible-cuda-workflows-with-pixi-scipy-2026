@@ -2,10 +2,10 @@
 This page contains exercises to help you practice the concepts learned in the Pixi introduction. Each exercise is designed to reinforce your understanding of Pixi's features and capabilities.
 
 ::: {warning}
-To make sure you do all this work in the same github repository, please first move to the `reproducible-ml-scipy-2025` directory you created in the [setup](setup.md) section.
+To make sure you do all this work in the same github repository, please first move to the `reproducible-cuda-scipy-2026` directory you created in the [setup](setup.md) section.
 
 ```bash
-cd ~/reproducible-ml-scipy-2025
+cd ~/reproducible-cuda-scipy-2026
 ```
 :::
 
@@ -19,8 +19,8 @@ cd ~/reproducible-ml-scipy-2025
 :class: dropdown
 ```bash
 # 1
-pixi init ~/reproducible-ml-scipy-2025/my-project
-cd ~/reproducible-ml-scipy-2025/my-project
+pixi init ~/reproducible-cuda-scipy-2026/my-project
+cd ~/reproducible-cuda-scipy-2026/my-project
 # 2
 pixi add python
 # 3
