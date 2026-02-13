@@ -2,14 +2,14 @@
 version: 1
 project:
   id: 4f62f83b-dbc0-4784-9550-b67b1a244538
-  title: Reproducible Machine Learning Workflows for Scientists with Pixi
+  title: Reproducible CUDA Accelerated Workflows for Scientists with Pixi
   description: |
     Scientific researchers need reproducible software environments for complex applications that can run across heterogeneous computing platforms.
-    Modern open source tools, like Pixi, provide automatic reproducibility solutions for all dependencies while providing a high level interface well suited for researchers.
+    Modern open source tools, like [Pixi](https://pixi.sh/), provide automatic reproducibility solutions for all dependencies while providing a high level interface well suited for researchers.
 
     This tutorial will provide a practical introduction to using Pixi to easily create scientific and AI/ML environments that benefit from hardware acceleration, across multiple machines and platforms.
-    The focus will be on applications using the PyTorch and JAX Python machine learning libraries with CUDA enabled, as well as deploying these environments to production settings in Linux container images.
-  keywords: [reproducible, machine learning, pixi, python, scipy]
+    The focus will be on CUDA applications, such as machine learning frameworks and use of CUDA Tile, as well as using pixi-build to construct bespoke CUDA enabled conda packages.
+  keywords: [reproducible, hardware acceleration, machine learning, pixi, cuda, python, scipy]
   authors:
     - name: "Matthew Feickert"
       id: matthew-feickert
@@ -27,13 +27,13 @@ project:
           institution: prefix.dev GmbH
       github: ruben-arts
 
-    - name: "John Kirkham"
-      id: john-kirkham
+    - name: "Katrina Riehl"
+      id: nv-kriehl
       affiliations:
         - id: nvidia
           institution: NVIDIA
       github: jakirkham
-  github: https://github.com/matthewfeickert-talks/reproducible-ml-for-scientists-with-pixi-scipy-2025
+  github: https://matthewfeickert-talks.github.io/reproducible-cuda-workflows-with-pixi-scipy-2026/
   abbreviations:
     CLI : "Command Line Interface"
     TOML: "Tom's Obvious, Minimal Language"
@@ -53,7 +53,6 @@ project:
     - file: cuda-conda.md
     - file: ml-example.md
     - file: cuda-hardware-acceleration.md
-    - file: containers.md
     # appendix
     - file: glossary.md
 
