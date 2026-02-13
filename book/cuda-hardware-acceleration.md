@@ -21,8 +21,8 @@ CuPy is distributed on PyPI and on conda-forge, so we can create a Pixi workspac
 Initialize the workspace
 
 ```bash
-pixi init ~/reproducible-ml-scipy-2025/cupy-example
-cd ~/reproducible-ml-scipy-2025/cupy-example
+pixi init ~/reproducible-cuda-scipy-2026/cupy-example
+cd ~/reproducible-cuda-scipy-2026/cupy-example
 ```
 
 add all the platforms we'd like people to be able to develop for, even though this will be run on `linux-64`
@@ -87,8 +87,8 @@ We can install it through either method, but to keep working with conda package,
 Initialize the workspace
 
 ```bash
-pixi init ~/reproducible-ml-scipy-2025/cudf-example
-cd ~/reproducible-ml-scipy-2025/cudf-example
+pixi init ~/reproducible-cuda-scipy-2026/cudf-example
+cd ~/reproducible-cuda-scipy-2026/cudf-example
 ```
 
 As CuDF is available as a conda package only for `linux-64` we'll just set that as the platform
