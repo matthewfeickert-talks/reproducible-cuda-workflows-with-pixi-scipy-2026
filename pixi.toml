@@ -1,0 +1,33 @@
+[workspace]
+channels = ["conda-forge"]
+name = "reproducible-cuda-workflows-with-pixi-scipy-2026"
+platforms = ["linux-64", "osx-64", "osx-arm64", "win-64"]
+version = "0.1.0"
+
+[tasks.build]
+description = "Build tutorial as static HTML website"
+cmd = "myst build --html"
+cwd = "book"
+
+[tasks.clean]
+description = "Remove exports, temp files and installed templates"
+cmd = "myst clean --yes"
+cwd = "book"
+
+[tasks.start]
+cmd = "myst start"
+cwd = "book"
+description = "Start a local server to preview the tutorial"
+
+[tasks.lint]
+description = "Run pre-commit on all files in the repository"
+cmd = "pre-commit run --all-files"
+
+[tasks.check-links]
+cmd = "lychee --no-progress book/*.md"
+description = "Check links in the tutorial, might fail if no GITHUB_TOKEN is set"
+
+[dependencies]
+mystmd = ">=1.8.0,<2"
+pre-commit = ">=4.5.1,<5"
+lychee = ">=0.22.0,<0.23"
