@@ -7,9 +7,9 @@
 This tutorial focuses on hardware acceleration for {term}`CUDA` environments which require an NVIDIA GPU to use.
 While an NVIDIA GPU is not required to be able to work through the tutorial, access to one will be required to run the examples.
 
-:::{important} SciPy 2025 in-person tutorial resources
+:::{important} SciPy 2026 in-person tutorial resources
 
-For the [in-person tutorial at SciPy 2025](https://cfp.scipy.org/scipy2025/talk/GDN8PN/) (on 2025-07-07) NVIDIA has donated GPU resources through an [NVIDIA Brev platform](https://developer.nvidia.com/brev).
+For the [in-person tutorial at SciPy 2026](https://cfp.scipy.org/scipy2026/talk/????/) (on 2026-07-??) NVIDIA has donated GPU resources through an [NVIDIA Brev platform](https://developer.nvidia.com/brev).
 Tutorial participants will be given a code to use at the start of the tutorial by the instructors.
 You must be in-person at the tutorial to receive the code.
 
@@ -153,7 +153,7 @@ Feel free to change any of the options below to suit your needs, but the followi
 ```bash
 gh repo create reproducible-cuda-scipy-2026 \
    --public \
-   --description "Reproducible Machine Learning Workflows for Scientists with Pixi at SciPy 2025" \
+   --description "Reproducible CUDA Accelerated Workflows for Scientists with Pixi at SciPy 2026" \
    --add-readme \
    --gitignore Python \
    --license MIT \
@@ -198,11 +198,11 @@ brev login
 ::: {warning} Resource use requires billing information
 
 Provisioning Brev instances requires billing information be added to your account.
-If you are running this at the in-person SciPy 2025 tutorial, **wait** to do these steps until after you are given the code at the start of the tutorial.
+If you are running this at the in-person SciPy 2026 tutorial, **wait** to do these steps until after you are given the code at the start of the tutorial.
 
 :::
 
-Later on in the [SciPy 2025 tutorial](https://cfp.scipy.org/scipy2025/talk/GDN8PN/), we'll use a coupon code to provision a new Brev GPU instance environment.
+Later on in the [SciPy 2026 tutorial](https://cfp.scipy.org/scipy2026/talk/????/), we'll use a coupon code to provision a new Brev GPU instance environment.
 
 The particular configuration we'll be using is:
 * 1x NVIDIA L4 GPU
