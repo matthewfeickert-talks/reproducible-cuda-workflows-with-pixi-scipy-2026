@@ -16,4 +16,4 @@ For reference on MyST functionality and features reference the [MyST documentati
 
 ## Acknowledgments
 
-This tutorial was supported by the [University of Wisconsin&ndash;Madison Data Science Institute](https://dsi.wisc.edu/), [Prefix.dev](https://prefix.dev/), and [NVIDIA](https://www.nvidia.com/).
+This tutorial was supported by the [University of Wisconsin&ndash;Madison Data Science Institute](https://dsi.wisc.edu/), [prefix.dev GmbH](https://prefix.dev/), and [NVIDIA](https://www.nvidia.com/).
