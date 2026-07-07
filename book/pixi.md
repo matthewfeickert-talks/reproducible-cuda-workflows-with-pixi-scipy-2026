@@ -7,35 +7,37 @@
 Pixi is a cross-platform workspace manager for reproducible software environments and development workflows.
 For scientific Python developers, a useful mental model is that Pixi combines parts of `conda`/`mamba`, `conda-lock`, `uv`, and a task runner, while also being able to manage non-Python dependencies such as CUDA, C/C++, Fortran, R, and Rust packages.
 
-If you are coming from `pip` or `uv`, Pixi adds first-class support for conda packages, compiled scientific libraries, CUDA libraries, compilers, and multi-platform lock files.
-If you are coming from `conda` or `mamba`, Pixi adds project-local environments, lock files by default, reusable tasks, and named environments that travel with the project.
+Most participants will already have pieces of this workflow: `pip` or `uv` for Python packages, `conda` or `mamba` for binary scientific packages, and shell scripts or Makefiles for repeatable commands.
+Pixi's value is not that these tools cannot install packages, but that one workspace can describe the full environment and workflow reproducibly.
+
+For `pip` and `uv` users, Pixi adds first-class support for conda packages, compiled scientific libraries, CUDA libraries, compilers, and multi-platform lock files.
+For `conda` and `mamba` users, Pixi keeps the conda package ecosystem while adding project-local lock files, tasks, named environments, and rich platform declarations.
 
 There are two main workflows:
 - Installing standalone tools globally (`pixi global`)
 - Managing reproducible project workspaces
 
 # What does Pixi solve?
-Pixi's goal is to solve fast reproducible developer and deployment workflows.
-Often written as *"it worked on my machine"*.
-Pixi gives the developer all the required tools to create an environment that they can share with colleagues and servers.
-While being sure there is nothing missing from the environment to run the project.
+Pixi helps make the answer to *"what did you run, and where?"* explicit and reproducible.
+For this tutorial, the important pieces are:
 
-There are some key focus points to solve this problem.
+1. **Reproducibility by default**: Pixi writes a `pixi.lock` file with the exact packages for each environment and platform.
+2. **Conda and PyPI together**: Pixi can install conda packages and PyPI packages into the same environment, using `uv` for PyPI dependencies.
+3. **Project-local environments**: Environments live with the workspace, so collaborators do not need to recreate your local conda environment naming scheme.
+4. **{term}`Cross-Platform` and {term}`Cross-Language` workflows**: Pixi can describe Linux, macOS, Windows, CUDA, Python, C/C++, Fortran, Rust, R, and more in one project model.
+5. **Tasks**: Pixi provides a cross-platform task runner so commands like testing, training, building, and linting are part of the shared workspace.
 
-1. **Reproducibility**: Pixi always locks all packages it installs into the environments into a lockfile
-2. **Speed**: By using modern technologies like Rust and a big focus on optimizations, Pixi is using as much of the machines capabilities to do it's work as fast as possible.
-3. **Virtualization**: By separating environments in dedicated folders, users can easily set up, build, and test a project without worrying about their other projects break in the meantime.
-4. **{term}`Cross-Platform`**: With everything Pixi can do it tries to bridge the gaps between the different operating systems, making collaboration easier than before.
-5. **{term}`Cross-Language`**: While Python is well-supported language, Pixi doesn't stop there, it also focusses on C/C++, CUDA, Rust, Fortran and more.
+For common workflow steps, Pixi can replace a few commands you might otherwise reach for from different tools:
 
-
-All of these points are wrapped in a set of main functionalities.
-
-1. **Virtual environment Management**: Pixi can create conda environments and activate them on demand.
-2. **Package management**: Pixi can install/update/upgrade/remove packages from these environments
-3. **Task management**: Pixi has a cross-platform task runner built-in, allowing users to share the same commands on all platforms.
-
-We'll dive deeper into these topics later on.
+| Task | You might use | Pixi |
+|---|---|---|
+| Add a conda package | `conda install scipy` / `mamba install scipy` | `pixi add scipy` |
+| Add a PyPI package | `pip install pydantic` / `uv add pydantic` | `pixi add --pypi pydantic` |
+| Run a command in the environment | `conda run ...` / `uv run ...` | `pixi run ...` |
+| Start an activated shell | `conda activate my-env` | `pixi shell` |
+| Lock an environment | `conda-lock` / `uv lock` | `pixi lock` |
+| Run project commands | `make test` / shell scripts | `pixi run test` |
+| Install a global CLI tool | `pipx install ruff` / `uv tool install ruff` | `pixi global install ruff` |
 
 # The project workflow
 Pixi is designed to be used in a project-based workflow.
