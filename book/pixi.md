@@ -387,6 +387,35 @@ pixi shell-hook
 ```
 This will print the shell script that is used to activate the environment.
 
+## Platforms
+Pixi solves environments for the platforms listed in the workspace manifest.
+A typical scientific Python project might support macOS laptops, Windows laptops, and Linux servers from one file:
+
+```{code} toml
+:filename: pixi.toml
+:linenos:
+[workspace]
+channels = ["conda-forge"]
+platforms = ["osx-arm64", "linux-64", "win-64"]
+```
+
+Pixi can also use richer platform declarations.
+For example, later in this tutorial we will distinguish a regular Linux target from a CUDA-capable Linux target:
+
+```{code} toml
+:filename: pixi.toml
+:linenos:
+[workspace]
+channels = ["conda-forge"]
+platforms = [
+  "osx-arm64",
+  "win-64",
+  "linux-64",
+  { name = "linux-64-cuda", platform = "linux-64", cuda = "12" },
+]
+```
+
+This lets one workspace describe both local CPU development and remote GPU execution with the platform requirements for each made explicit.
 
 ## Multiple environments
 Pixi can create multiple environments for you, so you can easily switch between them.
