@@ -23,7 +23,7 @@ This tutorial requires minimal software to be installed in advance:
    - At the moment a laptop is required and an ARM based tablet will not be sufficient.
 * [Pixi](https://pixi.sh/)
 * [Git](https://git-scm.com/), if not already familar with `git` and GitHub, please install [`gh`](https://cli.github.com/) as well to simplify the workflow.
-* [Brev CLI](https://docs.nvidia.com/brev/latest/brev-cli.html)
+* [Brev CLI](https://docs.nvidia.com/brev/latest/cli/getting-started)
 * Highly recommend a IDE like [Visual Studio Code](https://code.visualstudio.com/) or [PyCharm](https://www.jetbrains.com/pycharm/).
 
 ### Web Platforms (optional, but encouraged)
@@ -111,7 +111,7 @@ You can now use the GitHub CLI anywhere on your machine.
 ::: {warning} Brev on Windows
 :class: dropdown
 
-As described in the [Brev docs](https://docs.nvidia.com/brev/latest/brev-cli.html#installation-instructions)
+As described in the [Brev docs](https://docs.nvidia.com/brev/latest/cli/getting-started)
 
 > Brev is supported on Windows currently through the Windows Subsystem for Linux (WSL).
 
@@ -179,7 +179,7 @@ To access the NVIDIA Brev instance you'll also need to create an NVIDIA Brev acc
 
 #### Login to Brev account with Brev CLI
 
-To validate your Brev account and your Brev CLI install, login to your Brev account from the command line with [`brev login`](https://docs.nvidia.com/brev/latest/brev-cli.html#login).
+To validate your Brev account and your Brev CLI install, login to your Brev account from the command line with [`brev login`](https://docs.nvidia.com/brev/latest/cli/getting-started).
 
 ```bash
 brev login
