@@ -4,11 +4,15 @@
 ![Pixi banner](https://github.com/prefix-dev/pixi/assets/4995967/a3f9ff01-c9fb-4893-83c0-2a3f924df63e)
 
 
-Pixi is a cross-platform package manager that can manage complex development workflows.
+Pixi is a cross-platform workspace manager for reproducible software environments and development workflows.
+For scientific Python developers, a useful mental model is that Pixi combines parts of `conda`/`mamba`, `conda-lock`, `uv`, and a task runner, while also being able to manage non-Python dependencies such as CUDA, C/C++, Fortran, R, and Rust packages.
 
-There are two main features:
-- Installing tools globally (`pixi global`)
-- Project workflow
+If you are coming from `pip` or `uv`, Pixi adds first-class support for conda packages, compiled scientific libraries, CUDA libraries, compilers, and multi-platform lock files.
+If you are coming from `conda` or `mamba`, Pixi adds project-local environments, lock files by default, reusable tasks, and named environments that travel with the project.
+
+There are two main workflows:
+- Installing standalone tools globally (`pixi global`)
+- Managing reproducible project workspaces
 
 # What does Pixi solve?
 Pixi's goal is to solve fast reproducible developer and deployment workflows.
@@ -35,7 +39,7 @@ We'll dive deeper into these topics later on.
 
 # The project workflow
 Pixi is designed to be used in a project-based workflow.
-Tools like `poetry`, `uv`, `npm`, `deno`, `cargo`, `maven` and `pixi` are all designed to be used in a project-based workflow.
+Tools like `uv`, `npm`, `deno`, `cargo`, `maven` and `pixi` are all designed to be used in a project-based workflow.
 This means that you can create a project and then use Pixi to manage the dependencies and tasks for that project.
 You can think of a project as a self-contained directory that contains all the files and configurations needed to build and run your application.
 Often the project will keep the environment it installs close to the project folder itself, so it will not clutter the system.
@@ -46,7 +50,7 @@ To give a little background why Pixi is designed this way, let's take a look at 
 
 ::::{tab-set}
 :::{tab-item}Project-based workflow
-**Supporting tools:** `pixi`, `poetry`, `uv`, `npm`, `deno`, `cargo`, `maven`
+**Supporting tools:** `pixi`, `uv`, `npm`, `deno`, `cargo`, `maven`
 
 **Pros:**
 - Isolated environments per project (no conflicts)
