@@ -4,38 +4,44 @@
 ![Pixi banner](https://github.com/prefix-dev/pixi/assets/4995967/a3f9ff01-c9fb-4893-83c0-2a3f924df63e)
 
 
-Pixi is a cross-platform package manager that can manage complex development workflows.
+Pixi is a cross-platform workspace manager for reproducible software environments and development workflows.
+For scientific Python developers, a useful mental model is that Pixi combines parts of `conda`/`mamba`, `conda-lock`, `uv`, and a task runner, while also being able to manage non-Python dependencies such as CUDA, C/C++, Fortran, R, and Rust packages.
 
-There are two main features:
-- Installing tools globally (`pixi global`)
-- Project workflow
+Most participants will already have pieces of this workflow: `pip` or `uv` for Python packages, `conda` or `mamba` for binary scientific packages, and shell scripts or Makefiles for repeatable commands.
+Pixi's value is not that these tools cannot install packages, but that one workspace can describe the full environment and workflow reproducibly.
+
+For `pip` and `uv` users, Pixi adds first-class support for conda packages, compiled scientific libraries, CUDA libraries, compilers, and multi-platform lock files.
+For `conda` and `mamba` users, Pixi keeps the conda package ecosystem while adding project-local lock files, tasks, named environments, and rich platform declarations.
+
+There are two main workflows:
+- Installing standalone tools globally (`pixi global`)
+- Managing reproducible project workspaces
 
 # What does Pixi solve?
-Pixi's goal is to solve fast reproducible developer and deployment workflows.
-Often written as *"it worked on my machine"*.
-Pixi gives the developer all the required tools to create an environment that they can share with colleagues and servers.
-While being sure there is nothing missing from the environment to run the project.
+Pixi helps make the answer to *"what did you run, and where?"* explicit and reproducible.
+For this tutorial, the important pieces are:
 
-There are some key focus points to solve this problem.
+1. **Reproducibility by default**: Pixi writes a `pixi.lock` file with the exact packages for each environment and platform.
+2. **Conda and PyPI together**: Pixi can install conda packages and PyPI packages into the same environment, using `uv` for PyPI dependencies.
+3. **Project-local environments**: Environments live with the workspace, so collaborators do not need to recreate your local conda environment naming scheme.
+4. **{term}`Cross-Platform` and {term}`Cross-Language` workflows**: Pixi can describe Linux, macOS, Windows, CUDA, Python, C/C++, Fortran, Rust, R, and more in one project model.
+5. **Tasks**: Pixi provides a cross-platform task runner so commands like testing, training, building, and linting are part of the shared workspace.
 
-1. **Reproducibility**: Pixi always locks all packages it installs into the environments into a lockfile
-2. **Speed**: By using modern technologies like Rust and a big focus on optimizations, Pixi is using as much of the machines capabilities to do it's work as fast as possible.
-3. **Virtualization**: By separating environments in dedicated folders, users can easily set up, build, and test a project without worrying about their other projects break in the meantime.
-4. **{term}`Cross-Platform`**: With everything Pixi can do it tries to bridge the gaps between the different operating systems, making collaboration easier than before.
-5. **{term}`Cross-Language`**: While Python is well-supported language, Pixi doesn't stop there, it also focusses on C/C++, CUDA, Rust, Fortran and more.
+For common workflow steps, Pixi can replace a few commands you might otherwise reach for from different tools:
 
-
-All of these points are wrapped in a set of main functionalities.
-
-1. **Virtual environment Management**: Pixi can create conda environments and activate them on demand.
-2. **Package management**: Pixi can install/update/upgrade/remove packages from these environments
-3. **Task management**: Pixi has a cross-platform task runner built-in, allowing users to share the same commands on all platforms.
-
-We'll dive deeper into these topics later on.
+| Task | You might use | Pixi |
+|---|---|---|
+| Add a conda package | `conda install scipy` / `mamba install scipy` | `pixi add scipy` |
+| Add a PyPI package | `pip install pydantic` / `uv add pydantic` | `pixi add --pypi pydantic` |
+| Run a command in the environment | `conda run ...` / `uv run ...` | `pixi run ...` |
+| Start an activated shell | `conda activate my-env` | `pixi shell` |
+| Lock an environment | `conda-lock` / `uv lock` | `pixi lock` |
+| Run project commands | `make test` / shell scripts | `pixi run test` |
+| Install a global CLI tool | `pipx install ruff` / `uv tool install ruff` | `pixi global install ruff` |
 
 # The project workflow
 Pixi is designed to be used in a project-based workflow.
-Tools like `poetry`, `uv`, `npm`, `deno`, `cargo`, `maven` and `pixi` are all designed to be used in a project-based workflow.
+Tools like `uv`, `npm`, `deno`, `cargo`, `maven` and `pixi` are all designed to be used in a project-based workflow.
 This means that you can create a project and then use Pixi to manage the dependencies and tasks for that project.
 You can think of a project as a self-contained directory that contains all the files and configurations needed to build and run your application.
 Often the project will keep the environment it installs close to the project folder itself, so it will not clutter the system.
@@ -46,7 +52,7 @@ To give a little background why Pixi is designed this way, let's take a look at 
 
 ::::{tab-set}
 :::{tab-item}Project-based workflow
-**Supporting tools:** `pixi`, `poetry`, `uv`, `npm`, `deno`, `cargo`, `maven`
+**Supporting tools:** `pixi`, `uv`, `npm`, `deno`, `cargo`, `maven`
 
 **Pros:**
 - Isolated environments per project (no conflicts)
@@ -182,7 +188,7 @@ For the rest of this tutorial, we will use the `pixi.toml` file as the main file
 # Managing dependencies
 After creating the project, you can start adding dependencies to the project.
 Pixi uses the `pixi add` command to add dependencies to the project.
-This command will , by default, add the conda dependency to the `pixi.toml` or `pyproject.toml` file, solve the dependencies, write the lockfile and install the package in the environment. e.g. lets add `numpy` and `pytest` to the project.
+By default, this command adds the conda dependency to the `pixi.toml` or `pyproject.toml` file, solves the dependencies, writes the lockfile, and installs the package in the environment. For example, let's add `numpy` and `pytest` to the project.
 ```bash
 pixi add numpy pytest
 ```
@@ -206,35 +212,21 @@ numpy = ">=2.2.6,<3"
 pytest = ">=8.3.5,<9"
 ```
 
-If you want a specific version of a package, you can specify the version in the command.
+If you want a specific version or range, provide it when adding the package.
+The most common forms are:
+
 ```bash
-pixi add numpy==2.2.6 pytest==8.3.5
+pixi add "numpy==2.2.6"
+pixi add "numpy>=2.2,<3"
+pixi add "python=3.12.*"
+pixi add conda-forge::numpy
 ```
-Or you can make it more specific by using multiple types of specifiers.
-For the versions you can use the following specifiers:
-- `==`: Exact version, e.g. `numpy==2.2.6`
-- `>=`: Minimum version, e.g. `numpy>=2.2.6`
-- `<=`: Maximum version, e.g. `numpy<=2.2.6`
-- `>`: Greater than version, e.g. `numpy>2.2.6`
-- `<`: Less than version, e.g. `numpy<2.2.6`
-- `!=`: Not equal to version, e.g. `numpy!=2.2.6`
-- `~=`: Compatible release, e.g. `numpy~=2.2.6` (equivalent to `>=2.2.6, <3`)
 
-All of these specifiers can be combined, e.g. `numpy>=2.2.6,<3`, or `numpy~=2.2.6,!=2.2.7`.
-
-For the `[dependencies]` section, Pixi supports the conda MatchSpec format, which includes:
-| Field| Example | Comment |
-|---|---|---|
-| `name` | `numpy = "*"` |The name of the package, without the version specifier |
-| `version` | `numpy = ">=2.2.6,<3"` <br> `numpy = {version = "==2.2.6"}` | The version specification of the package. |
-| `build` | `numpy = {build = "py39h1234567_0"}` | The build string of the package |
-| `build_number` | `numpy = {build_number = 0}` | The build number of the package |
-| `channel` | `numpy = {channel = "conda-forge"}` | The channel where to get the package from (must be defined in `[workspace]`) |
-| `license` | `numpy = {license = "BSD-3-Clause"}` | The license of the package |
+Pixi supports conda MatchSpecs, so you can be more specific when needed, but most projects only need package names, version ranges, and occasionally a channel-qualified dependency.
 
 ## PyPI dependencies
-Pixi can also install packages from PyPI, it does this through it's integration with `uv`.
-In the Rust code Pixi depends on the `uv` package manager to install the packages from PyPI.
+Pixi can also install packages from PyPI through its integration with `uv`.
+In the Rust code, Pixi depends on the `uv` package manager to install the packages from PyPI.
 This means that you can use the `pixi add --pypi` command to install packages from PyPI.
 
 ```bash
@@ -278,7 +270,7 @@ We've got a mapping between the conda packages and the PyPI packages, so that we
 
 ::: {note} Pixi doesn't install `uv`!
 While Pixi uses `uv` to install the PyPI packages, it doesn't install `uv` itself.
-So you cannot us `uv` directly in the project, without installing it first.
+So you cannot use `uv` directly in the project, without installing it first.
 :::
 
 ### Special types of dependencies
@@ -374,13 +366,42 @@ python -VV
 exit
 ```
 
-Activating an environment is not alot more than running a script that sets the environment variables for you.
+Activating an environment is not much more than running a script that sets the environment variables for you.
 To investigate this, you can use `pixi shell-hook` to view what the shell script looks like.
 ```bash
 pixi shell-hook
 ```
 This will print the shell script that is used to activate the environment.
 
+## Platforms
+Pixi solves environments for the platforms listed in the workspace manifest.
+A typical scientific Python project might support macOS laptops, Windows laptops, and Linux servers from one file:
+
+```{code} toml
+:filename: pixi.toml
+:linenos:
+[workspace]
+channels = ["conda-forge"]
+platforms = ["osx-arm64", "linux-64", "win-64"]
+```
+
+Pixi can also use richer platform declarations.
+For example, later in this tutorial we will distinguish a regular Linux target from a CUDA-capable Linux target:
+
+```{code} toml
+:filename: pixi.toml
+:linenos:
+[workspace]
+channels = ["conda-forge"]
+platforms = [
+  "osx-arm64",
+  "win-64",
+  "linux-64",
+  { name = "linux-64-cuda", platform = "linux-64", cuda = "12" },
+]
+```
+
+This lets one workspace describe both local CPU development and remote GPU execution with the platform requirements for each made explicit.
 
 ## Multiple environments
 Pixi can create multiple environments for you, so you can easily switch between them.
@@ -446,3 +467,31 @@ This will create the following environments:
 ![Pixi environments](assets/solve-group.png)
 
 More information about the features can be found in the [documentation](https://pixi.sh/latest/workspace/multi_environment).
+
+# Preview: Pixi Build
+So far, we have used Pixi to manage environments and tasks.
+Pixi can also build conda packages from source through build backends.
+In practice, anything that can be packaged as a conda package can be built this way with a matching backend, including Python packages, C/C++ or Fortran libraries, and internal libraries that are not already packaged.
+
+Pixi Build is currently a preview feature, enabled in the workspace manifest:
+
+```{code} toml
+:filename: pixi.toml
+:linenos:
+[workspace]
+preview = ["pixi-build"]
+channels = ["conda-forge"]
+platforms = ["linux-64"]
+```
+
+A workspace can then depend on a local source package:
+
+```{code} toml
+:filename: pixi.toml
+:linenos:
+[dependencies]
+my-library = { path = "../my-library" }
+```
+
+If `my-library` contains Pixi package metadata, Pixi can build it as a conda package and install the built package into the environment.
+We will return to this in a later chapter.
