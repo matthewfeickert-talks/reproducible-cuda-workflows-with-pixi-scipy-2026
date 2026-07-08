@@ -403,70 +403,67 @@ platforms = [
 
 This lets one workspace describe both local CPU development and remote GPU execution with the platform requirements for each made explicit.
 
-## Multiple environments
-Pixi can create multiple environments for you, so you can easily switch between them.
-This is similar to how `conda` works, but Pixi keeps them specific to the project.
+## Features and environments
+Pixi separates reusable configuration from the environments you actually run.
 
-:::{note} Multi environment feature as if it was LEGO.
-:class: dropdown
-Pixi helps you make different LEGO sets (`environments`) using bags of parts (`feature`s). You can reuse parts for multiple sets without copying them.
+A **feature** is a named block of configuration.
+It can define dependencies, tasks, platforms, channels, or activation settings.
 
-LEGO sets (`environments`):
-- One set is for playing (has lots of fun tools).
-- One set is for testing (has only what you need to check if stuff works).
-- One set is for shipping (super clean, just what’s needed to run).
+An **environment** is a named combination of features.
+It is what Pixi solves, installs, and runs.
 
-Bags of parts (`features`):
-- One bag has all the tools you need to play.
-- One bag has all the tools you need to test.
-- One bag has all the tools you need to ship.
-
-By combining these bags, you can make all the different LEGO sets you want.
-Keeping every set clean and tidy, without duplicating the parts around.
-:::
-
-The best way to explain this is to give an example.
+The top-level `[dependencies]` and `[tasks]` tables are the **default feature**.
+The default feature is included automatically unless `no-default-feature = true` is set.
 
 ```{code} toml
-[dependencies] # Read this as `[feature.default.dependencies]`
-python = ">=3.11,<3.12"
-numpy = "*"
+:filename: pixi.toml
+:linenos:
+[workspace]
+channels = ["conda-forge"]
+platforms = ["linux-64", "osx-arm64", "win-64"]
 
-[feature.test.dependencies]
-pytest = ">=8.3.5,<9"
+# Default feature: shared runtime dependencies.
+[dependencies]
+python = ">=3.14.6,<3.15"
+numpy = ">=2.5.1,<3"
 
-[feature.format.dependencies]
-ruff = "*"
+[tasks]
+run-example = "python -c 'import numpy; print(numpy.__version__)'"
 
-[feature.debug.dependencies]
-ipython = "*"
+[feature.notebook.dependencies]
+jupyterlab = ">=4.6.1,<5"
+
+[feature.notebook.tasks]
+notebook = "jupyter lab"
+
+[feature.docs.dependencies]
+mystmd = ">=1.10.1,<2"
+
+[feature.docs.tasks]
+docs = "myst build --html"
 
 [environments]
-# A development environment with all the tools to play with, overwriting the default environment
-default = {features = ["test", "debug", "format"], solve-group = "default"}
+default = { features = [] }
+notebook = { features = ["notebook"] }
 
-# A testing environment with only the tools to test, great for CI
-test = {features = ["test"], solve-group = "default"}
-
-# A production environment with only the tools to run the code
-# The default feature is always included, so you don't need to specify it
-prod = {features = [], solve-group = "default"}
-
-# A minimal environment with only the tools to format the code
-format = { features = ["format"] , no-default-feature = true }
+# Documentation can be independent of the runtime dependencies.
+docs = { features = ["docs"], no-default-feature = true }
 ```
-This will create the following environments:
 
-| Environment | Features | Dependencies | Solve Group |
-| --- | --- | --- | --- |
-| `default` | `test`, `format`, `debug`, `default` | `python`, `numpy`, `pytest`, `ruff` | default |
-| `test` | `test`, `default` | `python`, `numpy`, `pytest` | default |
-| `prod` | `default` | `python`, `numpy` | default |
-| `format` | `format` | `ruff` | None |
+This gives you three environments:
 
-![Pixi environments](assets/solve-group.png)
+| Environment you run | Features combined into it | Example command |
+|---|---|---|
+| `default` | `default` | `pixi run run-example` |
+| `notebook` | `default` + `notebook` | `pixi run notebook` |
+| `docs` | `docs` only | `pixi run docs` |
 
-More information about the features can be found in the [documentation](https://pixi.sh/latest/workspace/multi_environment).
+Pixi can run `notebook` and `docs` without `-e` because each task is available in only one environment.
+Use `-e` or `--environment` when you want to select an environment explicitly.
+
+Use a **feature** to define a reusable workflow layer.
+Use an **environment** to choose which layers Pixi should install and run.
+Use `no-default-feature = true` when an environment should not include the shared runtime dependencies.
 
 # Preview: Pixi Build
 So far, we have used Pixi to manage environments and tasks.

@@ -228,7 +228,7 @@ However, there's many situations in which you want to **solve and environment fo
 
 There are two important features we're going to use here:
 - `target` specific configuration, to add dependencies for a specific `platform`.
-- `feature` specific configuration, to create [multiple `environments`](./pixi.md#multiple-environments).
+- `feature` specific configuration, to create [multiple `environments`](./pixi.md#features-and-environments).
 
 If we make the Pixi workspace multiplatform
 
