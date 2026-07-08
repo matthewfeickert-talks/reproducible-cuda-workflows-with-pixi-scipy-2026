@@ -25,16 +25,13 @@ pixi init ~/reproducible-cuda-scipy-2026/cupy-example
 cd ~/reproducible-cuda-scipy-2026/cupy-example
 ```
 
-add all the platforms we'd like people to be able to develop for, even though this will be run on `linux-64`
+add rich CUDA platform entries for the platforms we'd like people to be able to develop for, even though this will be run on `linux-64`
 
-```bash
-pixi workspace platform add linux-64 win-64
-```
-
-and add the CUDA system requirements
-
-```bash
-pixi workspace system-requirements add cuda 12
+```toml
+platforms = [
+  { name = "linux-64-cuda", platform = "linux-64", cuda = "12" },
+  { name = "win-64-cuda", platform = "win-64", cuda = "12" },
+]
 ```
 
 Then add the CuPy dependencies
@@ -91,16 +88,10 @@ pixi init ~/reproducible-cuda-scipy-2026/cudf-example
 cd ~/reproducible-cuda-scipy-2026/cudf-example
 ```
 
-As CuDF is available as a conda package only for `linux-64` we'll just set that as the platform
+As CuDF is available as a conda package only for `linux-64`, we'll just set that as a rich CUDA platform
 
-```bash
-pixi workspace platform add linux-64
-```
-
-and add the CUDA system requirements
-
-```bash
-pixi workspace system-requirements add cuda 12
+```toml
+platforms = [{ name = "linux-64-cuda", platform = "linux-64", cuda = "12" }]
 ```
 
 and then add the `rapidsai` conda channel but note that for things to work we need it to have **higher** priority than conda-forge

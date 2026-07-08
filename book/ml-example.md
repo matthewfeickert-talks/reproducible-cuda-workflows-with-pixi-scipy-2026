@@ -114,19 +114,29 @@ cpu = ["cpu"]
 ```
 
 Now let's add the GPU environment and dependencies.
-Let's start with the CUDA system requirements
+First add a rich CUDA platform entry and bind the `gpu` feature to it.
+The explicit `name` gives us a stable platform identifier to use in feature and target tables.
 
-```bash
-pixi workspace system-requirements add --feature gpu cuda 12
+```toml
+[workspace]
+platforms = [
+  "linux-64",
+  "osx-arm64",
+  "win-64",
+  { name = "linux-64-cuda", platform = "linux-64", cuda = "12" },
+]
+
+[feature.cpu]
+platforms = ["linux-64", "osx-arm64", "win-64"]
+
+[feature.gpu]
+platforms = ["linux-64-cuda"]
 ```
 
-::: {attention} Override the `__cuda` virtual package
+::: {attention} CUDA hardware is still required at runtime
 
-Remember that if you're on a platform that doesn't support the `system-requirement` you'll need to override the checks to solve the environment.
-
-```bash
-export CONDA_OVERRIDE_CUDA=12
-```
+The rich platform entry tells Pixi what `__cuda` virtual package to solve against.
+The GPU environment still needs to run on a machine with a compatible NVIDIA driver.
 
 :::
 
@@ -139,15 +149,15 @@ pixi workspace environment add --feature gpu gpu
 ✔ Added environment gpu
 ```
 
-and then add the GPU dependencies for the target platform of `linux-64` (where we'll run in production).
+and then add the GPU dependencies for the rich CUDA platform `linux-64-cuda` (where we'll run in production).
 
 ```bash
-pixi add --platform linux-64 --feature gpu pytorch-gpu torchvision
+pixi add --platform linux-64-cuda --feature gpu pytorch-gpu torchvision
 ```
 ```
 ✔ Added pytorch-gpu >=2.7.1,<3
 ✔ Added torchvision >=0.22.0,<0.23
-Added these only for platform(s): linux-64
+Added these only for platform(s): linux-64-cuda
 Added these only for feature: gpu
 ```
 
@@ -155,7 +165,12 @@ Added these only for feature: gpu
 [workspace]
 channels = ["conda-forge"]
 name = "ml-example"
-platforms = ["linux-64", "osx-arm64", "win-64"]
+platforms = [
+  "linux-64",
+  "osx-arm64",
+  "win-64",
+  { name = "linux-64-cuda", platform = "linux-64", cuda = "12" },
+]
 version = "0.1.0"
 
 [tasks]
@@ -163,14 +178,17 @@ version = "0.1.0"
 [dependencies]
 python = ">=3.13.5,<3.14"
 
+[feature.cpu]
+platforms = ["linux-64", "osx-arm64", "win-64"]
+
 [feature.cpu.dependencies]
 pytorch-cpu = ">=2.7.1,<3"
 torchvision = ">=0.22.0,<0.23"
 
-[feature.gpu.system-requirements]
-cuda = "12"
+[feature.gpu]
+platforms = ["linux-64-cuda"]
 
-[feature.gpu.target.linux-64.dependencies]
+[feature.gpu.target.linux-64-cuda.dependencies]
 pytorch-gpu = ">=2.7.1,<3"
 torchvision = ">=0.22.0,<0.23"
 
@@ -274,13 +292,21 @@ train-gpu  Train MNIST on GPU
 [workspace]
 channels = ["conda-forge"]
 name = "ml-example"
-platforms = ["linux-64", "osx-arm64", "win-64"]
+platforms = [
+  "linux-64",
+  "osx-arm64",
+  "win-64",
+  { name = "linux-64-cuda", platform = "linux-64", cuda = "12" },
+]
 version = "0.1.0"
 
 [tasks]
 
 [dependencies]
 python = ">=3.13.5,<3.14"
+
+[feature.cpu]
+platforms = ["linux-64", "osx-arm64", "win-64"]
 
 [feature.cpu.dependencies]
 pytorch-cpu = ">=2.7.1,<3"
@@ -289,10 +315,10 @@ torchvision = ">=0.22.0,<0.23"
 [feature.cpu.tasks]
 train-cpu = { cmd = "python src/torch_MNIST.py --epochs 2 --save-model --data-dir data", description = "Train MNIST on CPU" }
 
-[feature.gpu.system-requirements]
-cuda = "12"
+[feature.gpu]
+platforms = ["linux-64-cuda"]
 
-[feature.gpu.target.linux-64.dependencies]
+[feature.gpu.target.linux-64-cuda.dependencies]
 pytorch-gpu = ">=2.7.1,<3"
 torchvision = ">=0.22.0,<0.23"
 
@@ -326,13 +352,21 @@ cmd = "python src/torch_MNIST.py --epochs 14 --save-model --data-dir data"
 [workspace]
 channels = ["conda-forge"]
 name = "ml-example"
-platforms = ["linux-64", "osx-arm64", "win-64"]
+platforms = [
+  "linux-64",
+  "osx-arm64",
+  "win-64",
+  { name = "linux-64-cuda", platform = "linux-64", cuda = "12" },
+]
 version = "0.1.0"
 
 [tasks]
 
 [dependencies]
 python = ">=3.13.5,<3.14"
+
+[feature.cpu]
+platforms = ["linux-64", "osx-arm64", "win-64"]
 
 [feature.cpu.dependencies]
 pytorch-cpu = ">=2.7.1,<3"
@@ -342,10 +376,10 @@ torchvision = ">=0.22.0,<0.23"
 description = "Train MNIST on CPU"
 cmd = "python src/torch_MNIST.py --epochs 2 --save-model --data-dir data"
 
-[feature.gpu.system-requirements]
-cuda = "12"
+[feature.gpu]
+platforms = ["linux-64-cuda"]
 
-[feature.gpu.target.linux-64.dependencies]
+[feature.gpu.target.linux-64-cuda.dependencies]
 pytorch-gpu = ">=2.7.1,<3"
 torchvision = ">=0.22.0,<0.23"
 
@@ -432,13 +466,21 @@ pixi upgrade --feature inference
 [workspace]
 channels = ["conda-forge"]
 name = "ml-example"
-platforms = ["linux-64", "osx-arm64", "win-64"]
+platforms = [
+  "linux-64",
+  "osx-arm64",
+  "win-64",
+  { name = "linux-64-cuda", platform = "linux-64", cuda = "12" },
+]
 version = "0.1.0"
 
 [tasks]
 
 [dependencies]
 python = ">=3.13.5,<3.14"
+
+[feature.cpu]
+platforms = ["linux-64", "osx-arm64", "win-64"]
 
 [feature.cpu.dependencies]
 pytorch-cpu = ">=2.7.1,<3"
@@ -448,10 +490,10 @@ torchvision = ">=0.22.0,<0.23"
 description = "Train MNIST on CPU"
 cmd = "python src/torch_MNIST.py --epochs 2 --save-model --data-dir data"
 
-[feature.gpu.system-requirements]
-cuda = "12"
+[feature.gpu]
+platforms = ["linux-64-cuda"]
 
-[feature.gpu.target.linux-64.dependencies]
+[feature.gpu.target.linux-64-cuda.dependencies]
 pytorch-gpu = ">=2.7.1,<3"
 torchvision = ">=0.22.0,<0.23"
 
