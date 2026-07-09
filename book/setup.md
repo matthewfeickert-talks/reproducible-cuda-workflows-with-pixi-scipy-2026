@@ -170,6 +170,7 @@ cd reproducible-cuda-scipy-2026
 Now you have a GitHub repository set up to store your work from this tutorial.
 
 ## Prepare Brev Instance
+
 #### Create an NVIDIA Brev account
 
 To access the NVIDIA Brev instance you'll also need to create an NVIDIA Brev account.
@@ -230,6 +231,51 @@ brev open pixi-cuda
 # Or start an ssh session into the instance
 brev shell pixi-cuda
 ```
+
+#### Automate Brev Pixi runs
+
+This tutorial repository also provides a `brev` Pixi feature for running local Pixi workspaces on an NVIDIA Brev instance.
+The automation uploads the directory containing the selected `pixi.toml`, installs the Pixi environment on Brev, and stops the instance when finished.
+Run these commands from the top level of this tutorial repository.
+
+```bash
+# Run a command on Brev through Pixi
+pixi run brev-run -- book/code/cupy-example/pixi.toml -- python cupy-example.py
+
+# Prepare the Pixi workspace and open an interactive Brev shell
+pixi run brev-shell -- book/code/cupy-example/pixi.toml
+```
+
+Each run will get a unique id, this ensures there is no file clobbering.
+A small tip: `--keep-running` might be a useful flag if you want to do some incremental changes, the spinning up and down of a brev instance can take a while.
+
+
+:::{note} Advanced runner options
+:class: dropdown
+
+By default the runner uses the `pixi-cuda` instance name, an NVIDIA L4 GPU selector, and `/home/ubuntu/brev-pixi-runs` as the remote upload root.
+Use task arguments before the `pixi.toml` path to override defaults:
+
+```bash
+pixi run brev-run -- --instance pixi-cuda --gpu g2-standard-4:nvidia-l4:1 book/code/cupy-example/pixi.toml -- python cupy-example.py
+```
+
+Useful options:
+
+- `--instance NAME`: Brev instance to use.
+- `--gpu TYPE` / `--gpu-type TYPE`: GPU type used when creating a missing instance.
+- `--remote-root PATH`: remote directory for uploaded runs.
+- `--context DIR`: upload `DIR` instead of the directory containing `pixi.toml`; the manifest must be inside this directory.
+- `--no-provision`: skip creating or starting the Brev instance.
+- `--keep-running`: leave the Brev instance running for debugging. Without this, the runner stops the selected instance when finished.
+- `--dry-run`: print the Brev commands without running them.
+
+The defaults can also be overridden with `BREV_INSTANCE`, `BREV_GPU`, and `BREV_REMOTE_ROOT`.
+Check these environment variables before running: a stale `BREV_INSTANCE` can make the runner upload to and stop an unrelated instance.
+
+The `brev` Pixi environment is available on `linux-64`, `osx-64`, and `osx-arm64` hosts.
+
+:::
 
 #### Prepare your Brev instance
 

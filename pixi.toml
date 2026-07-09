@@ -32,3 +32,33 @@ description = "Check links in the tutorial, might fail if no GITHUB_TOKEN is set
 mystmd = ">=1.8.0,<2"
 pre-commit = ">=4.5.1,<5"
 lychee = ">=0.22.0,<0.23"
+
+[feature.brev]
+platforms = ["linux-64", "osx-64", "osx-arm64"]
+
+[feature.brev.dependencies]
+python = ">=3.14.6,<3.15"
+
+[feature.brev.target.linux-64.dependencies]
+brev = ">=0.6.329,<0.7"
+
+[feature.brev.target.osx-64.dependencies]
+brev = ">=0.6.329,<0.7"
+
+[feature.brev.target.osx-arm64.dependencies]
+brev = ">=0.6.329,<0.7"
+
+[feature.brev.tasks.brev-run]
+description = "Provision Brev, run a command from a Pixi manifest, then stop the instance"
+cmd = "python scripts/brev_pixi.py run"
+
+[feature.brev.tasks.brev-shell]
+description = "Provision Brev, prepare a Pixi manifest, open an interactive shell, then stop the instance"
+cmd = "python scripts/brev_pixi.py shell"
+
+[feature.brev.tasks.brev]
+description = "Run the brev-cli"
+cmd = "brev"
+
+[environments]
+brev = { features = ["brev"], no-default-feature = true }
