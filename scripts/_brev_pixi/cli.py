@@ -136,4 +136,3 @@ def normalize_command(raw_command: Sequence[str]) -> tuple[str, ...]:
     if not command:
         raise BrevPixiError("run mode requires a command after `--`, for example: -- python app.py")
     return command
-
