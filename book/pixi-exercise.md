@@ -11,7 +11,7 @@ cd ~/reproducible-cuda-scipy-2026
 
 :::::{tip} Exercise 1: Creating a project
 1. Create a new Pixi project named `my-project` using the command line.
-2. Add `python` as a dependency to your project.
+2. Add `python` 3.13 or 3.14 as a dependency to your project.
 3. Use the Pixi installed Python to print `"Hello, Pixi!"` to the console.
 4. Run a command to print the version of Python used in your project. You can see the location of the interpreter by running: `import sys;print(sys.executable)`
 
@@ -22,7 +22,7 @@ cd ~/reproducible-cuda-scipy-2026
 pixi init ~/reproducible-cuda-scipy-2026/my-project
 cd ~/reproducible-cuda-scipy-2026/my-project
 # 2
-pixi add python
+pixi add 'python>=3.13.5,<3.15'
 # 3
 pixi run python -c 'print("Hello, Pixi!")'
 # 4
@@ -42,19 +42,24 @@ version = "0.1.0"
 [tasks]
 
 [dependencies]
-python = ">=3.13.5,<3.14"
+python = ">=3.13.5,<3.15"
 :::
 ::::
 :::::
 
+:::{note}
+Pixi can also install conda dependencies from source with Pixi Build. Because Pixi Build is currently a preview feature, source-built conda dependencies need `preview = ["pixi-build"]` in the `[workspace]` table. Building a large package like SciPy from source can take a while.
+:::
+
 :::::{tip} Exercise 2: Dependencies
 1. Make your project work for Windows, macOS, and Linux.
 2. Add `scipy` as a dependency through the command line.
-3. Add `numpy` as a dependency through the command line.
+3. Add `numpy<2.5` as a dependency through the command line so it stays compatible with the later SciPy version pin.
 4. Add `fastqc` as a dependency from `bioconda`. Hint: the channel has to be added first.
 5. Add `pandas` as a `pypi` dependency through the command line.
 6. Add a `pypi` + `git` dependency on [`pytest`](https://github.com/pytest-dev/pytest) to your project.
-7. Visualize the locked dependencies in the command line.
+7. Enable the Pixi Build preview feature, then replace the conda-forge `scipy` dependency with a conda dependency built from the [SciPy git repository](https://github.com/scipy/scipy).
+8. Visualize the locked dependencies in the command line.
 
 ::::{hint} Solution
 :class: dropdown
@@ -64,7 +69,7 @@ pixi workspace platform add win-64 osx-arm64 osx-64 linux-64
 # 2
 pixi add scipy
 # 3
-pixi add numpy
+pixi add 'numpy<2.5'
 # 4
 pixi workspace channel add bioconda
 pixi add bioconda::fastqc
@@ -72,7 +77,16 @@ pixi add bioconda::fastqc
 pixi add pandas --pypi
 # 6
 pixi add pytest --pypi --git https://github.com/pytest-dev/pytest
-# 7: Any of:
+# 7: Add this line to the [workspace] table in pixi.toml first:
+# preview = ["pixi-build"]
+# Then replace the conda-forge SciPy dependency with a conda source dependency from git.
+pixi remove scipy --no-install
+# `pixi add` can take a few minutes and may appear idle here, so use --no-install
+# and let `pixi install` show the install/build progress afterwards.
+pixi add scipy --git https://github.com/scipy/scipy --no-install
+# This builds SciPy from source and can take a while.
+pixi install
+# 8: Any of:
 pixi list
 pixi list -x
 pixi tree
@@ -81,9 +95,10 @@ Resulting `pixi.toml` file:
 :::{code} toml
 :filename: pixi.toml
 :linenos:
-:emphasize-lines: 3,5,12-18
+:emphasize-lines: 3,4,6,13-14
 [workspace]
 authors = ["Jane Doe <jane.doe@example.com>"]
+preview = ["pixi-build"]
 channels = ["conda-forge", "bioconda"]
 name = "my-project"
 platforms = ["osx-arm64", "win-64", "osx-64", "linux-64"]
@@ -92,9 +107,9 @@ version = "0.1.0"
 [tasks]
 
 [dependencies]
-python = ">=3.13.5,<3.14"
-scipy = ">=1.16.0,<2"
-numpy = ">=2.3.0,<3"
+python = ">=3.13.5,<3.15"
+numpy = "<2.5"
+scipy = { git = "https://github.com/scipy/scipy" }
 fastqc = { version = ">=0.12.1,<0.13", channel = "bioconda" }
 
 [pypi-dependencies]
@@ -117,7 +132,7 @@ pixi add pandas
 pixi list pandas
 # Optionally, you can remove the old pandas dependency:
 pixi remove pandas --pypi
-# 2
+# 2: This switches scipy back from the git source dependency to a conda-forge package.
 pixi add scipy==1.15.1
 # 3
 pixi add pytest --pypi --git https://github.com/pytest-dev/pytest.git --tag 8.3.1
@@ -126,9 +141,10 @@ Resulting `pixi.toml` file:
 :::{code} toml
 :filename: pixi.toml
 :linenos:
-:emphasize-lines: 12,15,18
+:emphasize-lines: 3,13,16,19
 [workspace]
 authors = ["Jane Doe <jane.doe@example.com>"]
+preview = ["pixi-build"]
 channels = ["conda-forge", "bioconda"]
 name = "my-project"
 platforms = ["osx-arm64", "win-64", "osx-64", "linux-64"]
@@ -137,9 +153,9 @@ version = "0.1.0"
 [tasks]
 
 [dependencies]
-python = ">=3.13.5,<3.14"
+python = ">=3.13.5,<3.15"
 scipy = "==1.15.1"
-numpy = ">=2.3.0,<3"
+numpy = "<2.5"
 fastqc = { version = ">=0.12.1,<0.13", channel = "bioconda" }
 pandas = ">=2.3.0,<3"
 
@@ -195,9 +211,10 @@ Resulting `pixi.toml` file:
 :::{code} toml
 :filename: pixi.toml
 :linenos:
-:emphasize-lines: 17,20-26
+:emphasize-lines: 3,18,21-27
 [workspace]
 authors = ["Jane Doe <jane.doe@example.com>"]
+preview = ["pixi-build"]
 channels = ["conda-forge", "bioconda"]
 name = "my-project"
 platforms = ["osx-arm64", "win-64", "osx-64", "linux-64"]
@@ -206,9 +223,9 @@ version = "0.1.0"
 [tasks]
 
 [dependencies]
-python = ">=3.13.5,<3.14"
+python = ">=3.13.5,<3.15"
 scipy = "==1.15.1"
-numpy = ">=2.3.0,<3"
+numpy = "<2.5"
 fastqc = { version = ">=0.12.1,<0.13", channel = "bioconda" }
 pandas = ">=2.3.0,<3"
 
@@ -217,8 +234,6 @@ pytest = { git = "https://github.com/pytest-dev/pytest.git", tag = "8.3.1" }
 
 [feature.format.dependencies]
 ruff = "*"
-
-[environments]
 test = { features = ["test"], solve-group = "group1" }
 format = { features = ["format"], no-default-feature = true }
 default = { solve-group = "group1" }
@@ -260,9 +275,10 @@ Resulting `pixi.toml` file:
 :::{code} toml
 :filename: pixi.toml
 :linenos:
-:emphasize-lines: 9-12
+:emphasize-lines: 3,10-13
 [workspace]
 authors = ["Jane Doe <jane.doe@example.com>"]
+preview = ["pixi-build"]
 channels = ["conda-forge", "bioconda"]
 name = "my-project"
 platforms = ["osx-arm64", "win-64", "osx-64", "linux-64"]
@@ -275,9 +291,9 @@ greet-YOUR_NAME = [{ task = "greet", args = ["YOUR_NAME"] }]
 start = { args = ["name"], depends-on = [{ task = "hello" }, { task = "greet", args = ["{{ name }}"] }] }
 
 [dependencies]
-python = ">=3.13.5,<3.14"
+python = ">=3.13.5,<3.15"
 scipy = "==1.15.1"
-numpy = ">=2.3.0,<3"
+numpy = "<2.5"
 fastqc = { version = ">=0.12.1,<0.13", channel = "bioconda" }
 pandas = ">=2.3.0,<3"
 
@@ -289,8 +305,6 @@ ruff = "*"
 
 [feature.format.tasks]
 fmt = "ruff --version"
-
-[environments]
 test = { features = ["test"], solve-group = "group1" }
 format = { features = ["format"], no-default-feature = true }
 default = { solve-group = "group1" }
@@ -330,9 +344,10 @@ Resulting `pixi.toml` file:
 :::{code} toml
 :filename: pixi.toml
 :linenos:
-:emphasize-lines: 8,9,16
+:emphasize-lines: 3,9,10,17
 [workspace]
 authors = ["Jane Doe <jane.doe@example.com>"]
+preview = ["pixi-build"]
 channels = ["conda-forge", "bioconda"]
 name = "my-project"
 platforms = ["osx-arm64", "win-64", "osx-64", "linux-64"]
@@ -349,9 +364,9 @@ start = { args = ["name"], depends-on = [{ task = "hello" }, { task = "greet", a
 print-env = "echo $MY_ENV_VAR"
 
 [dependencies]
-python = ">=3.13.5,<3.14"
+python = ">=3.13.5,<3.15"
 scipy = "==1.15.1"
-numpy = ">=2.3.0,<3"
+numpy = "<2.5"
 fastqc = { version = ">=0.12.1,<0.13", channel = "bioconda" }
 pandas = ">=2.3.0,<3"
 
@@ -363,8 +378,6 @@ ruff = "*"
 
 [feature.format.tasks]
 fmt = "ruff --version"
-
-[environments]
 test = { features = ["test"], solve-group = "group1" }
 format = { features = ["format"], no-default-feature = true }
 default = { solve-group = "group1" }
