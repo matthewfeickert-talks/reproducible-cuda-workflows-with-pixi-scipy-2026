@@ -31,7 +31,7 @@ cmd = "cutile-brot"
 description = "Render a GPU Mandelbrot set in the terminal (cuTile)"
 
 [tasks.cutile-seahorse]
-cmd = "cutile-brot -0.743643887 0.131825904 0.00008 1500"
+cmd = "cutile-brot --center-re -0.743643887 --center-im 0.131825904 --span 0.00008 --max-iter 1500"
 description = "Deep zoom into seahorse valley (cuTile)"
 
 # Pin which CUDA compiler package the build backend resolves
