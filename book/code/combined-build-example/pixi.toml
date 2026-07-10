@@ -16,29 +16,23 @@ preview = ["pixi-build"]
 # `pixi install` will (re)build each one automatically when its sources change.
 cuda-brot = { path = "src/cuda-brot" }
 cutile-brot = { path = "src/cutile-brot" }
-# Statistical benchmarking tool used by the `benchmark` task.
-hyperfine = "*"
 
 # ── Tasks: run either example from the one workspace ───────────────────────
-[tasks.render]
+[tasks.cuda-brot]
 cmd = "cuda-brot"
 description = "Render the classic Mandelbrot set (CUDA C++)"
 
-[tasks.seahorse]
+[tasks.cuda-seahorse]
 cmd = "cuda-brot -0.743643887 0.131825904 0.00008 1500"
 description = "Deep zoom into seahorse valley (CUDA C++)"
 
-[tasks.mandelbrot]
+[tasks.cutile-brot]
 cmd = "cutile-brot"
 description = "Render a GPU Mandelbrot set in the terminal (cuTile)"
 
-# One fractal, two backends — race the CUDA C++ renderer against the cuTile
-# one. hyperfine warms up once (first run builds/caches), then reports mean
-# runtimes and a "X ran N× faster than Y" summary. Output is suppressed so the
-# fractals don't flood the terminal mid-benchmark.
-[tasks.benchmark]
-cmd = "hyperfine --warmup 1 --command-name cuda-brot 'cuda-brot' --command-name cutile-brot 'cutile-brot'"
-description = "Benchmark the CUDA C++ vs cuTile Mandelbrot renderers"
+[tasks.cutile-seahorse]
+cmd = "cutile-brot -0.743643887 0.131825904 0.00008 1500"
+description = "Deep zoom into seahorse valley (cuTile)"
 
 # Pin which CUDA compiler package the build backend resolves
 # `compilers = ["cuda"]` to. On conda-forge, CUDA 12+ compilers live in
