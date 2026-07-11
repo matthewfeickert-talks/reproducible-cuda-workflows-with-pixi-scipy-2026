@@ -205,10 +205,10 @@ If you are running this at the in-person SciPy 2026 tutorial, **wait** to do the
 Later on in the [SciPy 2026 tutorial](https://pretalx.com/scipy-2026/talk/9FQMMN/), we'll use a coupon code to provision a new Brev GPU instance environment.
 
 The particular configuration we'll be using is:
-* 1x NVIDIA L4 GPU
-* 24GiB VRAM
-* 16GiB Ram x 4 CPUS
-* GCP
+* 1x NVIDIA RTX PRO 4500 GPU
+* 32GiB VRAM
+* 32GiB Ram x 8 CPUS
+* AWS
 
 ::: {important}
 
