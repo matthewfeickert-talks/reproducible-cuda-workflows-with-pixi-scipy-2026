@@ -205,43 +205,93 @@ If you are running this at the in-person SciPy 2026 tutorial, **wait** to do the
 Later on in the [SciPy 2026 tutorial](https://pretalx.com/scipy-2026/talk/9FQMMN/), we'll use a coupon code to provision a new Brev GPU instance environment.
 
 The particular configuration we'll be using is:
-* 1x NVIDIA L4 GPU
-* 24GiB VRAM
-* 16GiB Ram x 4 CPUS
-* GCP
 
-You can select it from the [Brev new environment page](https://brev.nvidia.com/environment/new)
+* 1x NVIDIA RTX PRO 4500 GPU
+* 32GiB VRAM
+* 32GiB Ram x 8 CPUS
+* AWS
+
+::: {important}
+
+We recommend that you run the following commands to create a new instance with this configuration:
+
+```bash
+curl -sLO https://raw.githubusercontent.com/matthewfeickert-talks/reproducible-cuda-workflows-with-pixi-scipy-2026/refs/heads/main/book/code/setup_brev.sh
+brev create $(whoami)-scipy-2026 --type g7.2xlarge --startup-script @./setup_brev.sh
+```
+
+:::
+
+
+You _can_ select it from the [Brev new environment page](https://brev.nvidia.com/environment/new), but we recommend using the command line to ensure that you get the correct setup.
 
 [![brev-new-environment](./images/brev-new-environment-view.png)](https://brev.nvidia.com/environment/new)
 
-**OR** run the following command to create a new instance with the same configuration:
+
+::: {note}
+
+Any NVIDIA GPU that is of the Ampere or Ada GPU architecture (CUDA compute capability `8.x`) or the Blackwell architecture (CUDA compute capability `12.x`) will work for this tutorial.
+We are choosing to use the Blackwell RTX PRO 4500 for convenience.
+
+You can check the CUDA compute capability and the architecture of your NVIDIA GPU with the following commands
 
 ```bash
-brev create pixi-cuda --gpu g2-standard-4:nvidia-l4:1
+nvidia-smi --query-gpu=name,compute_cap
+nvidia-smi -q | grep -i architecture
 ```
+
+:::
 
 #### Access the NVIDIA Brev instance on your machine
-Once the instance is created, get access to it with the following command:
+
+Once your Brev instance has been provisioned and built, connect to it either an interactive shell over SSH with
+
 ```bash
-# Open the instance in vscode:
-brev open pixi-cuda
+# start an ssh session into the instance
+brev shell $(whoami)-scipy-2026
 ```
+
+or
+
 ```bash
-# Or start an ssh session into the instance
-brev shell pixi-cuda
+# open the instance in VS Code
+brev open $(whoami)-scipy-2026
 ```
 
 #### Prepare your Brev instance
 
-Once you have access to the Brev instance, you can use it like any other Linux machine
-and install any additional software you need.
-Please install the following software on your Brev instance:
+Once you have access to the Brev instance, you can use it like any other Linux machine and install any additional software you need.
+Ensure that your `~/.bashrc` has the following at the bottom
 
 ```bash
-# Pixi
-curl -fsSL https://pixi.sh/install.sh | sh
-echo -e '\neval "$(pixi completion --shell bash)"' >> ~/.bashrc
-source ~/.bashrc
-# Additional tools
-pixi global install gh
+export PATH="/home/ubuntu/.pixi/bin:$PATH"
+eval "$(pixi completion --shell bash)"
 ```
+
+If it doesn't, the startup script failed to run, and you should execute the following in your shell
+
+
+```bash
+curl -fsSL https://pixi.sh/install.sh | bash
+echo 'eval "$(pixi completion --shell bash)"' >> ${HOME}/.bashrc
+. ${HOME}/.bashrc
+```
+
+Please install the following useful software on your Brev instance:
+
+```bash
+pixi global install git gh bat
+```
+
+#### Cleaning up after the tutorial
+
+::: {attention}
+
+**After** the tutorial is finished, remember to logout and delete your Brev instance so that it doesn't sit idle but still using credits.
+You can do this from the command line after you exit your session with
+
+```bash
+brev delete $(whoami)-scipy-2026
+```
+
+:::
