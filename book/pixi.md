@@ -1,7 +1,7 @@
 # Pixi: Introduction
 
 
-![Pixi banner](https://github.com/prefix-dev/pixi/assets/4995967/a3f9ff01-c9fb-4893-83c0-2a3f924df63e)
+![Pixi banner](https://github.com/user-attachments/assets/fa2e98c2-0913-4098-9579-8f2efff7f814)
 
 
 Pixi is a cross-platform workspace manager for reproducible software environments and development workflows.
@@ -26,6 +26,7 @@ For this tutorial, the important pieces are:
 3. **Project-local environments**: Environments live with the workspace, so collaborators do not need to recreate your local conda environment naming scheme.
 4. **{term}`Cross-Platform` and {term}`Cross-Language` workflows**: Pixi can describe Linux, macOS, Windows, CUDA, Python, C/C++, Fortran, Rust, R, and more in one project model.
 5. **Tasks**: Pixi provides a cross-platform task runner so commands like testing, training, building, and linting are part of the shared workspace.
+6. **Package building**: Pixi can build conda packages from source, including CUDA-enabled packages, and publish them to a channel for others to use.
 
 For common workflow steps, Pixi can replace a few commands you might otherwise reach for from different tools:
 
@@ -208,8 +209,8 @@ version = "0.1.0"
 [tasks]
 
 [dependencies]
-numpy = ">=2.2.6,<3"
-pytest = ">=8.3.5,<9"
+numpy = ">=2.5.1,<3"
+pytest = ">=9.1.1,<10"
 ```
 
 If you want a specific version or range, provide it when adding the package.
@@ -241,7 +242,7 @@ In the `pixi.toml` file, it will be added to the `[pypi-dependencies]` section.
 :filename: pixi.toml
 :linenos:
 [pypi-dependencies]
-pydantic = ">=2.11.5, <3"
+pydantic = ">=2.13.4, <3"
 ```
 :::
 :::{tab-item}pyproject.toml
@@ -251,7 +252,7 @@ In the `pyproject.toml` file, it will be added to the `[project]` section in the
 :linenos:
 [project]
 # ...
-dependencies = ["pydantic>=2.11.5,<3"]
+dependencies = ["pydantic>=2.13.4,<3"]
 ```
 Things like `path` and `editable` are added through the Pixi specific section.
 For example:
@@ -301,7 +302,14 @@ What should you know about the lockfile?
 :filename: pixi.lock
 :caption: Example lockfile, highly simplified for readability
 :linenos:
-version: 6
+version: 7
+platforms:
+- name: linux-64
+  virtual-packages:
+  - __unix=0=0
+  - __linux=4.18
+  - __glibc=2.28
+  - __archspec=0=x86_64
 environments:
   default:
     channels:
@@ -309,15 +317,15 @@ environments:
     indexes:
     - https://pypi.org/simple
     packages:
-      osx-arm64:
-      - conda: https://prefix.dev/conda-forge/osx-arm64/bzip2-1.0.8-h99b78c6_7.conda
+      linux-64:
+      - conda: https://prefix.dev/conda-forge/linux-64/bzip2-1.0.8-h99b78c6_7.conda
       - pypi: ...
 packages:
-- conda: https://prefix.dev/conda-forge/osx-arm64/bzip2-1.0.8-h99b78c6_7.conda
+- conda: https://prefix.dev/conda-forge/linux-64/bzip2-1.0.8-h99b78c6_7.conda
   sha256: adfa71f158cbd872a36394c56c3568e6034aa55c623634b37a4836bd036e6b91
   md5: fc6948412dbbbe9a4c9ddbbcfe0a79ab
   depends:
-  - __osx >=11.0
+  - __unix
   license: bzip2-1.0.6
   license_family: BSD
   size: 122909
@@ -325,9 +333,8 @@ packages:
 - pypi: ...
 ```
 
-
 # Managing tasks
-Pixi has a built-in {term}`cross-platform` task runner that allows you to define tasks in the manifest.
+Pixi has a built-in {term}cross-platform task runner that allows you to define tasks in the manifest.
 This is a great way to share tasks with others and to ensure that the same tasks are run in the same environment.
 The tasks are defined in the `[tasks]` section.
 
@@ -465,7 +472,7 @@ Use a **feature** to define a reusable workflow layer.
 Use an **environment** to choose which layers Pixi should install and run.
 Use `no-default-feature = true` when an environment should not include the shared runtime dependencies.
 
-# Preview: Pixi Build
+# Building packages
 So far, we have used Pixi to manage environments and tasks.
 Pixi can also build conda packages from source through build backends.
 In practice, anything that can be packaged as a conda package can be built this way with a matching backend, including Python packages, C/C++ or Fortran libraries, and internal libraries that are not already packaged.
@@ -475,6 +482,7 @@ Pixi Build is currently a preview feature, enabled in the workspace manifest:
 ```{code} toml
 :filename: pixi.toml
 :linenos:
+:emphasize-lines: 2
 [workspace]
 preview = ["pixi-build"]
 channels = ["conda-forge"]
@@ -487,7 +495,7 @@ A workspace can then depend on a local source package:
 :filename: pixi.toml
 :linenos:
 [dependencies]
-my-library = { path = "../my-library" }
+my-library = { path = "src/my-library" }
 ```
 
 If `my-library` contains Pixi package metadata, Pixi can build it as a conda package and install the built package into the environment.

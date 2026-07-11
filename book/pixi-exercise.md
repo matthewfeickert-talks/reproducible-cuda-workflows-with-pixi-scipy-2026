@@ -47,10 +47,6 @@ python = ">=3.13.5,<3.15"
 ::::
 :::::
 
-:::{note}
-Pixi can also install conda dependencies from source with Pixi Build. Because Pixi Build is currently a preview feature, source-built conda dependencies need `preview = ["pixi-build"]` in the `[workspace]` table. Building a large package like SciPy from source can take a while.
-:::
-
 :::::{tip} Exercise 2: Dependencies
 1. Make your project work for Windows, macOS, and Linux.
 2. Add `scipy` as a dependency through the command line.
@@ -58,8 +54,7 @@ Pixi can also install conda dependencies from source with Pixi Build. Because Pi
 4. Add `fastqc` as a dependency from `bioconda`. Hint: the channel has to be added first.
 5. Add `pandas` as a `pypi` dependency through the command line.
 6. Add a `pypi` + `git` dependency on [`pytest`](https://github.com/pytest-dev/pytest) to your project.
-7. Enable the Pixi Build preview feature, then replace the conda-forge `scipy` dependency with a conda dependency built from the [SciPy git repository](https://github.com/scipy/scipy).
-8. Visualize the locked dependencies in the command line.
+7. Visualize the locked dependencies in the command line.
 
 ::::{hint} Solution
 :class: dropdown
@@ -77,20 +72,12 @@ pixi add bioconda::fastqc
 pixi add pandas --pypi
 # 6
 pixi add pytest --pypi --git https://github.com/pytest-dev/pytest
-# 7: Add this line to the [workspace] table in pixi.toml first:
-# preview = ["pixi-build"]
-# Then replace the conda-forge SciPy dependency with a conda source dependency from git.
-pixi remove scipy --no-install
-# `pixi add` can take a few minutes and may appear idle here, so use --no-install
-# and let `pixi install` show the install/build progress afterwards.
-pixi add scipy --git https://github.com/scipy/scipy --no-install
-# This builds SciPy from source and can take a while.
-pixi install
-# 8: Any of:
+# 7: Any of:
 pixi list
 pixi list -x
 pixi tree
 ```
+
 Resulting `pixi.toml` file:
 :::{code} toml
 :filename: pixi.toml
@@ -109,11 +96,10 @@ version = "0.1.0"
 [dependencies]
 python = ">=3.13.5,<3.15"
 numpy = "<2.5"
-scipy = { git = "https://github.com/scipy/scipy" }
 fastqc = { version = ">=0.12.1,<0.13", channel = "bioconda" }
 
 [pypi-dependencies]
-pandas = ">=2.3.0, <3"
+pandas = ">=3.0.3, <4"
 pytest = { git = "https://github.com/pytest-dev/pytest" }
 :::
 ::::
@@ -122,7 +108,7 @@ pytest = { git = "https://github.com/pytest-dev/pytest" }
 :::::{tip} Exercise 3: Modifying dependencies
 1. Replace `pandas` with a conda dependency on `pandas` from the `conda-forge` channel. Hint: make sure it worked by checking the environment with `pixi list pandas`
 2. Require the `scipy` dependency to be version `1.15.1`.
-3. Make the `pytest` use version `8.3.1` from the `git` repository.
+3. Make the `pytest` use version `8.3.1` from the `git` [repository](https://github.com/pytest-dev/pytest.git).
 
 ::::{hint} Solution
 :class: dropdown
@@ -211,7 +197,7 @@ Resulting `pixi.toml` file:
 :::{code} toml
 :filename: pixi.toml
 :linenos:
-:emphasize-lines: 3,18,21-27
+:emphasize-lines: 18,21-27
 [workspace]
 authors = ["Jane Doe <jane.doe@example.com>"]
 preview = ["pixi-build"]
@@ -227,13 +213,14 @@ python = ">=3.13.5,<3.15"
 scipy = "==1.15.1"
 numpy = "<2.5"
 fastqc = { version = ">=0.12.1,<0.13", channel = "bioconda" }
-pandas = ">=2.3.0,<3"
+pandas = ">=3.0.3, <4"
 
 [feature.test.pypi-dependencies]
 pytest = { git = "https://github.com/pytest-dev/pytest.git", tag = "8.3.1" }
 
 [feature.format.dependencies]
 ruff = "*"
+
 test = { features = ["test"], solve-group = "group1" }
 format = { features = ["format"], no-default-feature = true }
 default = { solve-group = "group1" }
@@ -275,7 +262,7 @@ Resulting `pixi.toml` file:
 :::{code} toml
 :filename: pixi.toml
 :linenos:
-:emphasize-lines: 3,10-13
+:emphasize-lines: 10-13
 [workspace]
 authors = ["Jane Doe <jane.doe@example.com>"]
 preview = ["pixi-build"]
@@ -295,7 +282,7 @@ python = ">=3.13.5,<3.15"
 scipy = "==1.15.1"
 numpy = "<2.5"
 fastqc = { version = ">=0.12.1,<0.13", channel = "bioconda" }
-pandas = ">=2.3.0,<3"
+pandas = ">=3.0.3, <4"
 
 [feature.test.pypi-dependencies]
 pytest = { git = "https://github.com/pytest-dev/pytest.git", tag = "8.3.1" }
@@ -344,7 +331,7 @@ Resulting `pixi.toml` file:
 :::{code} toml
 :filename: pixi.toml
 :linenos:
-:emphasize-lines: 3,9,10,17
+:emphasize-lines: 9,10,17
 [workspace]
 authors = ["Jane Doe <jane.doe@example.com>"]
 preview = ["pixi-build"]
@@ -368,7 +355,7 @@ python = ">=3.13.5,<3.15"
 scipy = "==1.15.1"
 numpy = "<2.5"
 fastqc = { version = ">=0.12.1,<0.13", channel = "bioconda" }
-pandas = ">=2.3.0,<3"
+pandas = ">=3.0.3, <4"
 
 [feature.test.pypi-dependencies]
 pytest = { git = "https://github.com/pytest-dev/pytest.git", tag = "8.3.1" }

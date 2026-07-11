@@ -16,14 +16,14 @@ Work through this chapter on your [Brev instance](setup.md#prepare-brev-instance
 1. Create a new Pixi workspace named `combined-build` in your repository.
 2. Enable the Pixi Build [preview feature](https://pixi.prefix.dev/latest/reference/pixi_manifest/#preview-features). (edit `pixi.toml` manually)
 3. Give it a single [rich platform](https://pixi.prefix.dev/latest/workspace/multi_platform_configuration/#declaring-virtual-packages-per-platform): `linux-64` that declares a CUDA 13 driver.
-4. Point its channel at `https://prefix.dev/conda-forge`.
-5. **Bonus:** add a second rich platform, `win-64` with a CUDA 13 driver, so the same workspace also builds on a Windows machine with an NVIDIA GPU.
+4. **Bonus:** add a second rich platform, `win-64` with a CUDA 13 driver, so the same workspace also builds on a Windows machine with an NVIDIA GPU.
 
 ::::{hint} Solution
 :class: dropdown
 Use [`pixi init`](https://pixi.prefix.dev/latest/reference/cli/pixi/init/) to create the workspace:
 ```bash
 # 1
+cd ~/reproducible-cuda-scipy-2026
 pixi init combined-build
 cd combined-build
 ```
@@ -31,7 +31,7 @@ Then edit `pixi.toml` so the `[workspace]` table enables the preview feature and
 :::{code} toml
 :filename: pixi.toml
 :linenos:
-:emphasize-lines: 3,5,6
+:emphasize-lines: 5,6
 [workspace]
 authors = ["Jane Doe <jane.doe@example.com>"]
 channels = ["https://prefix.dev/conda-forge"]
@@ -58,16 +58,41 @@ macOS (`osx-64`, `osx-arm64`) can't be added, since CUDA needs an NVIDIA GPU.
 :::::
 
 :::::{tip} Exercise 2: Package the cuTile app (`pixi-build-python`)
-Build a Python/cuTile package `cutile-brot` and add it to the workspace as a source dependency.
+Build a Python/cuTile package `combined-build/src/cutile-brot` and add it to the workspace as a source dependency.
 
 1. Create the package source tree and drop in the given source files (`__init__.py` and `mandelbrot.py`, below).
-2. Write a `pyproject.toml` for the package, with a `cutile-brot` entry-point script and the runtime dependencies `numpy`, `cupy`, and `cuda-tile`.
-3. Make sure you add the `cutile-brot` entry-point script to the `[project.scripts]` table in `pyproject.toml`.
+2. Create the `src/cutile-brot/pyproject.toml` file that declares the package as a Python project with a console script entry point. (See the given source below.)
 4. Write the package manifest (`pixi.toml`) that uses the [`pixi-build-python`](https://pixi.prefix.dev/latest/build/backends/pixi-build-python/) backend and maps the `pyproject.toml` dependencies onto conda packages.
 5. Add `cutile-brot` to the workspace as a source dependency.
 6. Add a `cutile-brot` task that runs the `cutile-brot` command.
 7. Run it and watch the fractal render on the GPU.
+::::{important} Given source: `src/cutile-brot/pyproject.toml`
+:class: dropdown
+:::{code} toml
+:filename: src/cutile-brot/pyproject.toml
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
 
+[project]
+name = "cutile-brot"
+version = "0.1.0"
+description = "A minimal cuTile Mandelbrot example, packaged for distribution."
+requires-python = ">=3.11"
+license = "Apache-2.0"
+dependencies = [
+    "numpy>=2.5.1,<3",
+    "cupy>=14.1.1,<15",
+    "cuda-tile>=1.4.0,<2",
+]
+
+[project.scripts]
+cutile-brot = "cutile_brot.mandelbrot:main"
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/cutile_brot"]
+:::
+::::
 ::::{important} Given source: `src/cutile-brot/src/cutile_brot/__init__.py`
 :class: dropdown
 :::{code} python
@@ -86,8 +111,6 @@ __all__ = ["mandelbrot_compute", "__version__"]
 :class: dropdown
 :::{code} python
 :filename: src/cutile-brot/src/cutile_brot/mandelbrot.py
-# SPDX-License-Identifier: Apache-2.0
-
 """cutile-brot, the cuTile edition.
 
 A Mandelbrot renderer for your terminal, computed on the GPU with cuTile.
@@ -228,36 +251,11 @@ if __name__ == "__main__":
 ::::{hint} Solution
 :class: dropdown
 ```bash
-# 1: create the source tree, then paste the given source files into place
+# 1 + 2: create the source tree, then paste the given source files into place
 mkdir -p src/cutile-brot/src/cutile_brot
 # (create src/cutile-brot/src/cutile_brot/__init__.py and mandelbrot.py
 #  from the "Given source" dropdowns above)
 ```
-2. Write the package's `pyproject.toml`:
-:::{code} toml
-:filename: src/cutile-brot/pyproject.toml
-:linenos:
-[build-system]
-requires = ["hatchling"]
-build-backend = "hatchling.build"
-
-[project]
-name = "cutile-brot"
-version = "0.1.0"
-description = "A minimal cuTile Mandelbrot example, packaged for distribution."
-requires-python = ">=3.11"
-dependencies = [
-    "numpy>=2.5.1,<3",
-    "cupy>=14.1.1,<15",
-    "cuda-tile>=1.4.0,<2",
-]
-
-[project.scripts]
-cutile-brot = "cutile_brot.mandelbrot:main"
-
-[tool.hatch.build.targets.wheel]
-packages = ["src/cutile_brot"]
-:::
 3. Write the package manifest. It has **no** `[workspace]` table, only `[package.build]`:
 :::{code} toml
 :filename: src/cutile-brot/pixi.toml
@@ -299,11 +297,23 @@ cutile-brot = { cmd = "cutile-brot", description = "Render a GPU Mandelbrot set 
 [dependencies]
 cutile-brot = { path = "src/cutile-brot" }
 :::
+:::{code} bash
+tree
+├── pixi.toml
+└── src
+    └── cutile-brot
+        ├── pixi.toml
+        ├── pyproject.toml
+        └── src
+            └── cutile_brot
+                ├── __init__.py
+                └── mandelbrot.py
+
 ::::
 :::::
 
 :::::{tip} Exercise 3: Package the CUDA C++ app (`pixi-build-cmake`)
-Now build the CUDA C++ counterpart `cuda-brot` with the CMake backend, in the *same* workspace.
+Now build the CUDA C++ counterpart `combined-build/src/cuda-brot` with the CMake backend, in the *same* workspace.
 
 1. Create the package source tree and drop in the given `main.cu` and `CMakeLists.txt` (below).
 2. Write the package manifest using the [`pixi-build-cmake`](https://pixi.prefix.dev/latest/build/backends/pixi-build-cmake/) backend.
