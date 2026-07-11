@@ -1,10 +1,10 @@
 # Pixi Build: exercises
 
-In these exercises you will build the [`combined-build-example`](https://github.com/matthewfeickert-talks/reproducible-cuda-workflows-with-pixi-scipy-2026/tree/main/book/code/combined-build-example) from scratch: one Pixi workspace that builds **two** conda packages — the same Mandelbrot fractal through two [Pixi Build](https://pixi.prefix.dev/latest/build/backends/) backends.
+In these exercises you will build the [`combined-build-example`](https://github.com/matthewfeickert-talks/reproducible-cuda-workflows-with-pixi-scipy-2026/tree/main/book/code/combined-build-example) from scratch: one Pixi workspace that builds **two** conda packages, both computing the same Mandelbrot fractal through two [Pixi Build](https://pixi.prefix.dev/latest/build/backends/) backends.
 See the [Pixi Build introduction chapter](pixi-build-cuda.md) for the concepts, and the [Pixi Build docs](https://pixi.prefix.dev/latest/build/getting_started/) for the full reference.
 
 You will write the **manifests** yourself.
-The application source (the cuTile kernel and the CUDA C++ kernel) is *given* — the point here is packaging, not writing GPU code.
+The application source (the cuTile kernel and the CUDA C++ kernel) is *given*. The point here is packaging, not writing GPU code.
 
 ::: {warning} These exercises need a GPU
 Building the CUDA C++ package needs the CUDA toolchain (Pixi installs it for you from conda-forge), and *running* either package needs an NVIDIA GPU.
@@ -17,6 +17,7 @@ Work through this chapter on your [Brev instance](setup.md#prepare-brev-instance
 2. Enable the Pixi Build [preview feature](https://pixi.prefix.dev/latest/reference/pixi_manifest/#preview-features). (edit `pixi.toml` manually)
 3. Give it a single [rich platform](https://pixi.prefix.dev/latest/workspace/multi_platform_configuration/#declaring-virtual-packages-per-platform): `linux-64` that declares a CUDA 13 driver.
 4. Point its channel at `https://prefix.dev/conda-forge`.
+5. **Bonus:** add a second rich platform, `win-64` with a CUDA 13 driver, so the same workspace also builds on a Windows machine with an NVIDIA GPU.
 
 ::::{hint} Solution
 :class: dropdown
@@ -43,6 +44,16 @@ version = "0.1.0"
 
 [dependencies]
 :::
+
+**Bonus:** to also build on Windows, add a `win-64` rich platform alongside `linux-64`:
+:::{code} toml
+:filename: pixi.toml
+platforms = [
+  { platform = "linux-64", cuda = "13" },
+  { platform = "win-64", cuda = "13" },
+]
+:::
+macOS (`osx-64`, `osx-arm64`) can't be added, since CUDA needs an NVIDIA GPU.
 ::::
 :::::
 
@@ -247,7 +258,7 @@ cutile-brot = "cutile_brot.mandelbrot:main"
 [tool.hatch.build.targets.wheel]
 packages = ["src/cutile_brot"]
 :::
-3. Write the package manifest. It has **no** `[workspace]` table — only `[package.build]`:
+3. Write the package manifest. It has **no** `[workspace]` table, only `[package.build]`:
 :::{code} toml
 :filename: src/cutile-brot/pixi.toml
 :linenos:
@@ -256,7 +267,7 @@ backend = { name = "pixi-build-python", version = "0.*" }
 # Map the pyproject.toml dependencies onto conda-forge packages.
 config.ignore-pypi-mapping = false
 :::
-4. Add the source dependency by editing the workspace `pixi.toml` directly — source `path` dependencies are written into the manifest by hand:
+4. Add the source dependency by editing the workspace `pixi.toml` directly, since source `path` dependencies are written into the manifest by hand:
 :::{code} toml
 :filename: pixi.toml
 [dependencies]
@@ -329,7 +340,7 @@ install(TARGETS cuda-brot RUNTIME DESTINATION bin)
 :class: dropdown
 :::{code} cpp
 :filename: src/cuda-brot/src/main.cu
-// cuda-brot — a Mandelbrot renderer for your terminal, computed on the GPU.
+// cuda-brot: a Mandelbrot renderer for your terminal, computed on the GPU.
 // Every pixel is one CUDA thread, drawn with Unicode half-blocks (▀).
 
 #include <cuda_runtime.h>
@@ -514,7 +525,7 @@ cuda_compiler_version = ["13.1"]
 cuda-brot = { path = "src/cuda-brot" }
 :::
 ```bash
-# 5 (first run compiles with nvcc — this can take a little while)
+# 5 (first run compiles with nvcc, this can take a little while)
 pixi task add cuda-brot cuda-brot --description "Render the classic Mandelbrot set (CUDA C++)"
 pixi run cuda-brot
 ```
@@ -551,7 +562,7 @@ So far the packages only exist inside the workspace environment. Now turn them i
 
 1. Build each package into a `.conda` artifact with [`pixi publish`](https://pixi.prefix.dev/latest/reference/cli/pixi/publish/).
 2. Install each package globally straight from its source directory with [`pixi global install`](https://pixi.prefix.dev/latest/reference/cli/pixi/global/install/).
-3. Verify: from *outside* the workspace (e.g. your home directory), run `cutile-brot` and `cuda-brot` directly — no `pixi run`.
+3. Verify: from *outside* the workspace (e.g. your home directory), run `cutile-brot` and `cuda-brot` directly (no `pixi run`).
 4. **Bonus:** add "seahorse valley" deep-zoom tasks that pass coordinates to each renderer. With these parameters (`-0.743643887 0.131825904 0.00008 1500`), the Mandelbrot set renders a seahorse-shaped valley in the fractal.
 
 ::::{hint} Solution

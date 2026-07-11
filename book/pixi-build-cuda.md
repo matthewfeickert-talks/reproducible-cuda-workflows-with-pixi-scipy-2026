@@ -5,8 +5,8 @@ This chapter is where we return to that.
 
 We will build **two** conda packages, both computing the same Mandelbrot fractal on the GPU, each through a different [Pixi Build](https://pixi.prefix.dev/latest/build/backends/) backend:
 
-- `cutile-brot` — a Python/[cuTile](https://github.com/NVIDIA/cutile-python) package, built with the [`pixi-build-python`](https://pixi.prefix.dev/latest/build/backends/pixi-build-python/) backend.
-- `cuda-brot` — a CUDA C++ package, built with the [`pixi-build-cmake`](https://pixi.prefix.dev/latest/build/backends/pixi-build-cmake/) backend (`nvcc` + CMake).
+- `cutile-brot`: a Python/[cuTile](https://github.com/NVIDIA/cutile-python) package, built with the [`pixi-build-python`](https://pixi.prefix.dev/latest/build/backends/pixi-build-python/) backend.
+- `cuda-brot`: a CUDA C++ package, built with the [`pixi-build-cmake`](https://pixi.prefix.dev/latest/build/backends/pixi-build-cmake/) backend (`nvcc` + CMake).
 
 See the [Pixi Build getting started guide](https://pixi.prefix.dev/latest/build/getting_started/) for the full picture; this chapter walks the CUDA-flavored version of it.
 
@@ -66,6 +66,20 @@ preview = ["pixi-build"]
 ```
 
 The `cuda = "13"` entry declares the `__cuda` virtual package on this platform, exactly as we did in the [CUDA conda packages chapter](cuda-conda.md#adding-a-cuda-rich-platform).
+
+::::{note} Also build on Windows
+CUDA runs on Windows too, so the same workspace can build for a Windows machine with an NVIDIA GPU. Add a second rich platform:
+
+```{code} toml
+:filename: pixi.toml
+platforms = [
+  { platform = "linux-64", cuda = "13" },
+  { platform = "win-64", cuda = "13" },
+]
+```
+
+Pixi then solves and builds both `cutile-brot` and `cuda-brot` for Linux and Windows from the one manifest. macOS (`osx-64`, `osx-arm64`) cannot be added here, because CUDA requires an NVIDIA GPU and Apple hardware has none.
+::::
 
 # Source dependencies
 
@@ -128,7 +142,7 @@ packages = ["src/cutile_brot"]
 
 The `[project.scripts]` entry is what gives us a `cutile-brot` command once the package is installed.
 
-The **package** manifest sitting next to it is tiny — the Python backend reads the name, version and dependencies from `pyproject.toml`:
+The **package** manifest sitting next to it is tiny: the Python backend reads the name, version and dependencies from `pyproject.toml`:
 
 ```{code} toml
 :filename: src/cutile-brot/pixi.toml
@@ -146,7 +160,7 @@ Setting `config.ignore-pypi-mapping = false` tells it to instead **map** those P
 # A CUDA C++ package: `pixi-build-cmake`
 
 The [`pixi-build-cmake`](https://pixi.prefix.dev/latest/build/backends/pixi-build-cmake/) backend compiles `cuda-brot`'s `.cu` file with `nvcc` through CMake.
-The CMake project is ordinary, with one line that matters for packaging — the `install(TARGETS ...)` rule tells the backend which artifact to put into the package:
+The CMake project is ordinary, with one line that matters for packaging: the `install(TARGETS ...)` rule tells the backend which artifact to put into the package:
 
 ```{code} cmake
 :filename: src/cuda-brot/CMakeLists.txt
