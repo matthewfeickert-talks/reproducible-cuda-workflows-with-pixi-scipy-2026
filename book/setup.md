@@ -210,16 +210,22 @@ The particular configuration we'll be using is:
 * 16GiB Ram x 4 CPUS
 * GCP
 
-You _can_ select it from the [Brev new environment page](https://brev.nvidia.com/environment/new)
+::: {important}
 
-[![brev-new-environment](./images/brev-new-environment-view.png)](https://brev.nvidia.com/environment/new)
-
-**BUT** we recommend that you run the following commands to create a new instance with the same configuration:
+We recommend that you run the following commands to create a new instance with this configuration:
 
 ```bash
 curl -sLO https://raw.githubusercontent.com/matthewfeickert-talks/reproducible-cuda-workflows-with-pixi-scipy-2026/refs/heads/main/book/code/setup_brev.sh
 brev create $(whoami)-scipy-2026 --type g7.2xlarge --startup-script @./setup_brev.sh
 ```
+
+:::
+
+
+You _can_ select it from the [Brev new environment page](https://brev.nvidia.com/environment/new), but we recommend using the command line to ensure that you get the correct setup.
+
+[![brev-new-environment](./images/brev-new-environment-view.png)](https://brev.nvidia.com/environment/new)
+
 
 #### Access the NVIDIA Brev instance on your machine
 
@@ -261,3 +267,16 @@ Please install the following useful software on your Brev instance:
 ```bash
 pixi global install git gh bat
 ```
+
+#### Cleaning up after the tutorial
+
+::: {attention}
+
+**After** the tutorial is finished, remember to logout and delete your Brev instance so that it doesn't sit idle but still using credits.
+You can do this from the command line after you exit your session with
+
+```bash
+brev delete $(whoami)-scipy-2026
+```
+
+:::
