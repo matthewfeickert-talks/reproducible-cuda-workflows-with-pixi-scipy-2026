@@ -33,7 +33,7 @@ project:
         - id: nvidia
           institution: NVIDIA
       github: nv-kriehl
-  github: https://matthewfeickert-talks.github.io/reproducible-cuda-workflows-with-pixi-scipy-2026/
+  github: https://github.com/matthewfeickert-talks/reproducible-cuda-workflows-with-pixi-scipy-2026/
   abbreviations:
     CLI : "Command Line Interface"
     TOML: "Tom's Obvious, Minimal Language"
