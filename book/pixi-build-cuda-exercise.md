@@ -295,7 +295,7 @@ cutile-brot = { path = "src/cutile-brot" }
 Now build the CUDA C++ counterpart `cuda-brot` with the CMake backend, in the *same* workspace.
 
 1. Create the package source tree and drop in the given `main.cu` and `CMakeLists.txt` (below).
-2. Write the package manifest using the [`pixi-build-cmake`](https://pixi.prefix.dev/latest/build/backends/pixi-build-cmake/) backend. 
+2. Write the package manifest using the [`pixi-build-cmake`](https://pixi.prefix.dev/latest/build/backends/pixi-build-cmake/) backend.
 3. Request a `cxx` **and** a `cuda` compiler, so that the right compilers for your device are used.
 4. Add `*.cu` files as [`extra-input-globs`](https://pixi.prefix.dev/latest/build/backends/pixi-build-cmake/#extra-input-globs), so that the package gets rebuild when the CUDA sources change
 5. Add `cuda-cudart-dev` as a `package.host-dependency`.
