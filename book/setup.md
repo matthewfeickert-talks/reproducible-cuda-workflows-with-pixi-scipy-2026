@@ -251,7 +251,7 @@ nvidia-smi -q | grep -i architecture
 
 #### Access the NVIDIA Brev instance on your machine
 
-Once your Brev instance has been provisioned and built, connect to it locally through a terminal or through Visual Studio Code.
+Once your Brev instance has been provisioned and built, connect to it locally through Visual Studio Code or through a terminal.
 
 ```bash
 # open the instance in VS Code
