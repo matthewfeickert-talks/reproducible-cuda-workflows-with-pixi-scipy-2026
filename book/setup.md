@@ -205,6 +205,7 @@ If you are running this at the in-person SciPy 2026 tutorial, **wait** to do the
 Later on in the [SciPy 2026 tutorial](https://pretalx.com/scipy-2026/talk/9FQMMN/), we'll use a coupon code to provision a new Brev GPU instance environment.
 
 The particular configuration we'll be using is:
+
 * 1x NVIDIA RTX PRO 4500 GPU
 * 32GiB VRAM
 * 32GiB Ram x 8 CPUS
@@ -226,6 +227,20 @@ You _can_ select it from the [Brev new environment page](https://brev.nvidia.com
 
 [![brev-new-environment](./images/brev-new-environment-view.png)](https://brev.nvidia.com/environment/new)
 
+
+::: {note}
+
+Any NVIDIA GPU that is of the Ampere or Ada GPU architecture (CUDA compute capability `8.x`) or the Blackwell architecture (CUDA compute capability `12.x`) will work for this tutorial.
+We are choosing to use the Blackwell RTX PRO 4500 for convenience.
+
+You can check the CUDA compute capability and the architecture of your NVIDIA GPU with the following commands
+
+```bash
+nvidia-smi --query-gpu=name,compute_cap
+nvidia-smi -q | grep -i architecture
+```
+
+:::
 
 #### Access the NVIDIA Brev instance on your machine
 
