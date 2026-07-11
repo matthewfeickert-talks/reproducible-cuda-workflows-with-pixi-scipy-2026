@@ -1,6 +1,6 @@
 # Reproducible CUDA Accelerated Workflows for Scientists with Pixi
 
-Taught at [SciPy 2026](https://www.scipy2026.scipy.org/) as a [tutorial](https://cfp.scipy.org/scipy2026/talk/???????/) on ??? July ?th, 2026
+Taught at [SciPy 2026](https://www.scipy2026.scipy.org/) as a [tutorial](https://pretalx.com/scipy-2026/talk/9FQMMN/) on Monday July 13th, 2026
 
 ## Abstract
 
@@ -12,10 +12,10 @@ The focus will be on CUDA applications, such as machine learning frameworks and 
 
 ## SciPy Logistical Information
 
-* Tutorial name: [Reproducible CUDA Accelerated Workflows for Scientists with Pixi](https://matthewfeickert-talks.github.io/reproducible-cuda-workflows-with-pixi-scipy-2026/)
-* Date: 2026-07-??
-* Time: TBD
-* Location: TBD
+* Tutorial name: [Reproducible CUDA Accelerated Workflows for Scientists with Pixi](https://pretalx.com/scipy-2026/talk/9FQMMN/)
+* Date: 2026-07-13 (Monday)
+* Time: 13:30&ndash;17:30 Central
+* Location: University Hall, University of Minnesota
 
 ## Rough Outline
 
