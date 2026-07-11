@@ -66,3 +66,7 @@ The focus will be on CUDA applications, such as machine learning frameworks and 
 * General question and answer time with instructor team.
 
 This tutorial was supported by the [University of Wisconsin&ndash;Madison Data Science Institute](https://dsi.wisc.edu/), [prefix.dev GmbH](https://prefix.dev/), and [NVIDIA](https://www.nvidia.com/).
+
+## Acknowledgements
+
+Special thanks to [Tim de Jager](https://github.com/tdejager) of prefix.dev GmBH and [Daniel Ching](https://github.com/carterbox) of NVIDIA for their review, feedback, and contributions to this tutorial.
