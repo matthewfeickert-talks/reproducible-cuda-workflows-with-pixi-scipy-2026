@@ -226,11 +226,14 @@ brev create $(whoami)-scipy-2026 --type g7.2xlarge --startup-script @./setup_bre
 
 :::
 
-::::{hint} Through the online NVIDIA Brev platform
+:::{hint} Through the online NVIDIA Brev platform
 :class: dropdown
-You _can_ select it from the [Brev new environment page](https://brev.nvidia.com/environment/new), but we recommend using the command line to ensure that you get the correct setup.
+
+You _can_ select the Brev instance configuration from the [Brev new environment page](https://brev.nvidia.com/environment/new), but we recommend using the command line to ensure that you get the correct setup.
 
 [![brev-new-environment](./images/brev-new-environment-view.png)](https://brev.nvidia.com/environment/new)
+
+:::
 
 ::: {note}
 
@@ -245,7 +248,6 @@ nvidia-smi -q | grep -i architecture
 ```
 
 :::
-::::
 
 #### Access the NVIDIA Brev instance on your machine
 
@@ -254,20 +256,21 @@ Once your Brev instance has been provisioned and built, connect to it locally th
 ```bash
 # open the instance in VS Code
 brev open $(whoami)-scipy-2026 code
+```
 
-# or
+or
 
+```bash
 # start an ssh session into the instance
 brev shell $(whoami)-scipy-2026
 ```
 
 :::{attention} Brev instance startup
 
-The brev instance may take a few minutes to start up.
-
-Even when the cli returns the message that the instance is ready, it may take a few minutes for the instance to be fully ready to use.
-
-Check if the instance is ready by checking if the `pixi` command is available on the instance with:
+The Brev instance may take a few minutes to start up.
+Even when the `brev create` cli returns the message that the instance is ready, it may take a few minutes for the instance to be fully ready to use.
+You can check the status of the instance build on the "GPU Environments" page on https://brev.nvidia.com/.
+Alternatively, you can check if the instance is ready by checking if the `pixi` command is available on the instance with:
 
 ```bash
 pixi --version
