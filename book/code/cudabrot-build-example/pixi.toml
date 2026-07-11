@@ -1,0 +1,40 @@
+# ── The workspace: your development environment ────────────────────────────
+[workspace]
+name = "cudabrot"
+channels = ["https://prefix.dev/conda-forge"]
+# Declare that this platform provides a CUDA driver (the `__cuda` virtual
+# package). This is what lets the solver pick GPU-enabled builds.
+platforms = [{ platform = "linux-64", cuda = "13" }]
+preview = ["pixi-build"]
+
+[dependencies]
+# Depend on our own package as a source dependency: `pixi run` and
+# `pixi install` will (re)build it automatically when sources change.
+cudabrot = { path = "." }
+
+[tasks]
+render = "cudabrot"
+# The classic "seahorse valley" — same binary, deeper zoom.
+seahorse = "cudabrot -0.743643887 0.131825904 0.00008 1500"
+
+# Pin which CUDA compiler package the build backend resolves
+# `compilers = ["cuda"]` to. On conda-forge, CUDA 12+ compilers live in
+# the `cuda-nvcc` packages.
+[workspace.build-variants]
+cuda_compiler = ["cuda-nvcc"]
+cuda_compiler_version = ["13.1"]
+
+# ── The package: what `pixi publish` turns into a .conda file ──────────────
+[package]
+name = "cudabrot"
+version = "0.1.0"
+
+[package.build]
+backend = { name = "pixi-build-cmake", version = "0.*" }
+config.compilers = ["cxx", "cuda"]
+config.extra-input-globs = ["*.cu"]
+
+[package.host-dependencies]
+# Headers + libcudart to compile and link against. Its run-export makes the
+# resulting package depend on `cuda-cudart` at runtime automatically.
+cuda-cudart-dev = "*"

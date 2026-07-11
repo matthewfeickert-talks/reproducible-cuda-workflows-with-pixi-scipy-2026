@@ -1,0 +1,7 @@
+# ── The cutile-brot package (Python / pixi-build-python) ───────────────────
+# A *package* manifest only. Name, version and dependencies are read from the
+# adjacent pyproject.toml by the python backend. The consuming workspace is in
+# ../../pixi.toml.
+[package.build]
+backend = { name = "pixi-build-python", version = "0.*" }
+config.ignore-pypi-mapping = false

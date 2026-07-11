@@ -1,0 +1,16 @@
+# ── The cuda-brot package: what `pixi publish` turns into a .conda file ────
+# This is a *package* manifest (no `[workspace]`): it only describes how to
+# build cuda-brot. The workspace that consumes it lives in ../../pixi.toml.
+[package]
+name = "cuda-brot"
+version = "0.1.0"
+
+[package.build]
+backend = { name = "pixi-build-cmake", version = "0.*" }
+config.compilers = ["cxx", "cuda"]
+config.extra-input-globs = ["*.cu"]
+
+[package.host-dependencies]
+# Headers + libcudart to compile and link against. Its run-export makes the
+# resulting package depend on `cuda-cudart` at runtime automatically.
+cuda-cudart-dev = "*"
