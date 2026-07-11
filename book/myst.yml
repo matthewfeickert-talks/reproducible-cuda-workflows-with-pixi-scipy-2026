@@ -50,9 +50,13 @@ project:
     - file: introduction.md
     - file: pixi.md
     - file: pixi-exercise.md
-    - file: cuda-conda.md
-    - file: ml-example.md
-    - file: cuda-hardware-acceleration.md
+    - file: pixi-build-cuda.md
+    - file: pixi-build-cuda-exercise.md
+    - title: Bonus Tutorials
+      children:
+        - file: cuda-conda.md
+        - file: ml-example.md
+        - file: cuda-hardware-acceleration.md
     # appendix
     - file: glossary.md
 

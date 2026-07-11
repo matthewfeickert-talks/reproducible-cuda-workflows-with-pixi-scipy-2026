@@ -59,7 +59,11 @@ The focus will be on CUDA applications, such as machine learning frameworks and 
 
 * [General hardware acceleration using CUDA](cuda-hardware-acceleration.md), an overview of how to use CUDA for general hardware acceleration like replacing NumPy with CuPy.
 
-**03:30 &ndash; 04:00 (30 min):**
+**03:30 &ndash; 03:50 (30 min):**
+
+* [Building CUDA packages from source with Pixi Build](pixi-build-cuda.md), and its [exercises](pixi-build-cuda-exercise.md): package your own CUDA C++ and Python/cuTile code as conda packages.
+
+**03:50 &ndash; 04:00 (10 min):**
 
 * Discussion over solutions to exercises.
 * Time for participants to start exploring their own projects with Pixi and CUDA.
