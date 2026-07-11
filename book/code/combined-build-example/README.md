@@ -30,26 +30,15 @@ combined-build-example/
 ## Run the examples
 
 ```console
-pixi run render      # cuda-brot:   classic full-set view (CUDA C++)
-pixi run seahorse    # cuda-brot:   deep zoom into seahorse valley
-pixi run mandelbrot  # cutile-brot: Mandelbrot rendered in the terminal
+pixi run cuda-brot        # cuda-brot:   classic full-set view (CUDA C++)
+pixi run cuda-seahorse    # cuda-brot:   deep zoom into seahorse valley
+pixi run cutile-brot      # cutile-brot: Mandelbrot rendered in the terminal
+pixi run cutile-seahorse  # cutile-brot: deep zoom into seahorse valley
 ```
 
 The first invocation of each builds the relevant package from source (Pixi
 downloads the toolchain, compiles, and caches). Subsequent runs are instant
 unless sources change.
-
-## Benchmark both backends
-
-Race the two Mandelbrot renderers against each other — same fractal, `nvcc` +
-CMake vs cuTile + Python — with [hyperfine](https://github.com/sharkdp/hyperfine):
-
-```console
-pixi run benchmark
-```
-
-It warms up once (so first-build cost is excluded), times repeated runs of each,
-and prints mean runtimes plus a "X ran N× faster than Y" summary.
 
 ## Requirements
 

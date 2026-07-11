@@ -1,4 +1,0 @@
-# pixi environments and build caches
-.pixi/
-dist/
-build/

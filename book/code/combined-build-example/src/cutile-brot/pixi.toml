@@ -4,4 +4,7 @@
 # ../../pixi.toml.
 [package.build]
 backend = { name = "pixi-build-python", version = "0.*" }
+# Adding `ignore-pypi-mapping = false` here tells the Python backend to *not* ignore
+# the `pyproject.toml`'s `[project.dependencies]` section.
+# It automatically maps the dependencies to conda-forge packages, and will warn if it can't find a mapping.
 config.ignore-pypi-mapping = false
