@@ -1,4 +1,4 @@
-cmake_minimum_required(VERSION 3.24)
+cmake_minimum_required(VERSION 3.24...4.3)
 
 # Build for all major GPU architectures by default so the resulting conda
 # package runs on any reasonably modern NVIDIA GPU. Use "native" while

@@ -2,7 +2,7 @@
 
 A Mandelbrot renderer for your terminal, computed on your GPU — and a complete
 example of building **and packaging** CUDA C++ software with
-[Pixi](https://pixi.sh) and the `pixi-build-cmake` backend.
+[Pixi](https://pixi.prefix.dev/) and the `pixi-build-cmake` backend.
 
 This is the CUDA C++ counterpart to the [`cutile-build-example`](../cutile-build-example),
 which builds the same fractal with the Python `pixi-build-python` backend. One
