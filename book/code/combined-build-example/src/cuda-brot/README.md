@@ -39,7 +39,7 @@ unless sources change.
 ## Package it
 
 ```console
-pixi publish --target-dir ./dist
+pixi publish
 ```
 
 This produces a relocatable `cuda-brot-0.1.0-<build>.conda` package you can
