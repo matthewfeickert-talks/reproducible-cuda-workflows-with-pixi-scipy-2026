@@ -410,7 +410,7 @@ PyTorch build NCCL version: (2, 27, 3)
 Number of GPUs found on system: 1
 
 Active GPU index: 0
-Active GPU name: NVIDIA L4
+Active GPU name: NVIDIA RTX PRO 4500 Blackwell Server Edition
 ```
 
 ## Exercise: Multi-environment Pixi workspaces
