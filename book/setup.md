@@ -212,8 +212,12 @@ The particular configuration we'll be using is:
 * AWS
 
 ::: {important}
+Setup the right organization in Brev before creating the instance.
+```bash
+brev org set 2026-scipy-cuda-pixi
+```
 
-We recommend that you run the following commands to create a new instance with this configuration:
+Run the following commands to create a new instance with this configuration:
 
 ```bash
 curl -sLO https://raw.githubusercontent.com/matthewfeickert-talks/reproducible-cuda-workflows-with-pixi-scipy-2026/refs/heads/main/book/code/brev/setup_brev.sh
@@ -222,11 +226,11 @@ brev create $(whoami)-scipy-2026 --type g7.2xlarge --startup-script @./setup_bre
 
 :::
 
-
+::::{hint} Through the online NVIDIA Brev platform
+:class: dropdown
 You _can_ select it from the [Brev new environment page](https://brev.nvidia.com/environment/new), but we recommend using the command line to ensure that you get the correct setup.
 
 [![brev-new-environment](./images/brev-new-environment-view.png)](https://brev.nvidia.com/environment/new)
-
 
 ::: {note}
 
@@ -241,47 +245,36 @@ nvidia-smi -q | grep -i architecture
 ```
 
 :::
+::::
 
 #### Access the NVIDIA Brev instance on your machine
 
-Once your Brev instance has been provisioned and built, connect to it either an interactive shell over SSH with
-
-```bash
-# start an ssh session into the instance
-brev shell $(whoami)-scipy-2026
-```
-
-or
+Once your Brev instance has been provisioned and built, connect to it locally through a terminal or through Visual Studio Code.
 
 ```bash
 # open the instance in VS Code
 brev open $(whoami)-scipy-2026 code
+
+# or
+
+# start an ssh session into the instance
+brev shell $(whoami)-scipy-2026
 ```
 
-#### Prepare your Brev instance
+:::{attention} Brev instance startup
+The brev instance may take a few minutes to start up.
 
-Once you have access to the Brev instance, you can use it like any other Linux machine and install any additional software you need.
-Ensure that your `~/.bashrc` has the following at the bottom
+Even when the cli returns the message that the instance is ready, it may take a few minutes for the instance to be fully ready to use.
+
+Check if the instance is ready by checking if the `pixi` command is available on the instance with:
 
 ```bash
-export PATH="/home/ubuntu/.pixi/bin:$PATH"
-eval "$(pixi completion --shell bash)"
+source ~/.bashrc
+pixi --version
 ```
 
-If it doesn't, the startup script failed to run, and you should execute the following in your shell
-
-
-```bash
-curl -fsSL https://pixi.sh/install.sh | bash
-echo 'eval "$(pixi completion --shell bash)"' >> ${HOME}/.bashrc
-. ${HOME}/.bashrc
-```
-
-Please install the following useful software on your Brev instance:
-
-```bash
-pixi global install git gh bat
-```
+If this doesn't work after a few minutes, please reach out to the instructors for help.
+Or install run the commands in the [Brev instance setup script](./code/brev/setup_brev.sh) manually.
 
 #### Cleaning up after the tutorial
 
