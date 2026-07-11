@@ -5,7 +5,7 @@ Taught at [SciPy 2026](https://www.scipy2026.scipy.org/) as a [tutorial](https:/
 ## Abstract
 
 Scientific researchers need reproducible software environments for complex applications that can run across heterogeneous computing platforms.
-Modern open source tools, like [Pixi](https://pixi.sh/), provide automatic reproducibility solutions for all dependencies while providing a high level interface well suited for researchers.
+Modern open source tools, like [Pixi](https://pixi.prefix.dev/), provide automatic reproducibility solutions for all dependencies while providing a high level interface well suited for researchers.
 
 This tutorial will provide a practical introduction to using Pixi to easily create scientific and AI/ML environments that benefit from hardware acceleration, across multiple machines and platforms.
 The focus will be on CUDA applications, such as machine learning frameworks and use of CUDA Tile, as well as using pixi-build to construct bespoke CUDA enabled conda packages.

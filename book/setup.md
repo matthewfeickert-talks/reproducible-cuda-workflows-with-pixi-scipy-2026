@@ -21,7 +21,7 @@ This tutorial requires minimal software to be installed in advance:
 
 * A computer running an 64 bit version of Linux, macOS, or Windows.
    - At the moment a laptop is required and an ARM based tablet will not be sufficient.
-* [Pixi](https://pixi.sh/)
+* [Pixi](https://pixi.prefix.dev/)
 * [Git](https://git-scm.com/), if not already familiar with `git` and GitHub, please install [`gh`](https://cli.github.com/) as well to simplify the workflow.
 * [Brev CLI](https://docs.nvidia.com/brev/latest/cli/getting-started)
 * Highly recommend a IDE like [Visual Studio Code](https://code.visualstudio.com/) or [PyCharm](https://www.jetbrains.com/pycharm/).
@@ -44,7 +44,7 @@ As [GitHub requires two-factor authentication](https://docs.github.com/en/authen
 (install-pixi)=
 ### Pixi
 
-To install Pixi follow [the installation instructions](https://pixi.sh/latest/#installation) for your particular machine and then restart your shell.
+To install Pixi follow [the installation instructions](https://pixi.prefix.dev/latest/#installation) for your particular machine and then restart your shell.
 
 ::::{tab-set}
 
@@ -70,7 +70,7 @@ powershell -ExecutionPolicy ByPass -c "irm -useb https://pixi.sh/install.ps1 | i
 
 #### Pixi Shell completions
 
-Additionally, install the [Pixi shell completions](https://pixi.sh/latest/advanced/installation/#autocompletion) for your particular shell choice.
+Additionally, install the [Pixi shell completions](https://pixi.prefix.dev/latest/advanced/installation/#autocompletion) for your particular shell choice.
 
 ### Git
 
@@ -124,7 +124,7 @@ To participate in the GPU component of the workshop with Brev on a Windows machi
 :::
 
 For the portion of the tutorial where GPUs will be used we'll be working on an [NVIDIA Brev instance](https://developer.nvidia.com/brev).
-To install the CLI API for Brev, we'll use [`pixi global`](https://pixi.sh/latest/global_tools/introduction/) so make sure you first have [Pixi installed](#install-pixi), as described above, and then run
+To install the CLI API for Brev, we'll use [`pixi global`](https://pixi.prefix.dev/latest/global_tools/introduction/) so make sure you first have [Pixi installed](#install-pixi), as described above, and then run
 
 ```bash
 pixi global install brev
