@@ -9,7 +9,7 @@ While an NVIDIA GPU is not required to be able to work through the tutorial, acc
 
 :::{important} SciPy 2026 in-person tutorial resources
 
-For the [in-person tutorial at SciPy 2026](https://pretalx.com/scipy-2026/talk/9FQMMN/ (on 2026-07-13) NVIDIA has donated GPU resources through an [NVIDIA Brev platform](https://developer.nvidia.com/brev).
+For the [in-person tutorial at SciPy 2026](https://pretalx.com/scipy-2026/talk/9FQMMN/) (on 2026-07-13) NVIDIA has donated GPU resources through an [NVIDIA Brev platform](https://developer.nvidia.com/brev).
 Tutorial participants will be given a code to use at the start of the tutorial by the instructors.
 You must be in-person at the tutorial to receive the code.
 
@@ -202,7 +202,7 @@ If you are running this at the in-person SciPy 2026 tutorial, **wait** to do the
 
 :::
 
-Later on in the [SciPy 2026 tutorial](https://pretalx.com/scipy-2026/talk/9FQMMN/, we'll use a coupon code to provision a new Brev GPU instance environment.
+Later on in the [SciPy 2026 tutorial](https://pretalx.com/scipy-2026/talk/9FQMMN/), we'll use a coupon code to provision a new Brev GPU instance environment.
 
 The particular configuration we'll be using is:
 * 1x NVIDIA L4 GPU
