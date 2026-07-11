@@ -57,7 +57,7 @@ This significantly improved the ability for researchers to easily create CUDA ac
 
 This is all possible via use of the `__cuda` [virtual conda package](https://docs.conda.io/projects/conda/en/latest/user-guide/tasks/manage-virtual.html), which is determined automatically by conda package managers from the hardware information associated with the machine the package manager is installed on.
 
-With Pixi, a user can get this information with [`pixi info`](https://pixi.sh/latest/advanced/explain_info_command/), which could have output that looks something like
+With Pixi, a user can get this information with [`pixi info`](https://pixi.prefix.dev/latest/advanced/explain_info_command/), which could have output that looks something like
 
 ```bash
 pixi info
@@ -228,7 +228,7 @@ platforms = [
 ]
 :::
 
-We can then use Pixi's [platform specific `target` tables](https://pixi.sh/latest/reference/pixi_manifest/#the-target-table) to add dependencies for an environment to only a specific platform entry.
+We can then use Pixi's [platform specific `target` tables](https://pixi.prefix.dev/latest/reference/pixi_manifest/#the-target-table) to add dependencies for an environment to only a specific platform entry.
 So, if we know that a dependency only belongs in a CUDA solve then we can have Pixi add it for only that rich platform with
 
 ```bash

@@ -256,7 +256,7 @@ Add `train-cpu` and `train-gpu` tasks to the Pixi workspace
 :::: {hint} Solution
 :class: dropdown
 
-Let's add the `train-cpu` task first with [`pixi task add`](https://pixi.sh/latest/reference/cli/pixi/task/add/)
+Let's add the `train-cpu` task first with [`pixi task add`](https://pixi.prefix.dev/latest/reference/cli/pixi/task/add/)
 
 ```bash
 pixi task add --feature cpu --description "Train MNIST on CPU" train-cpu "python src/torch_MNIST.py --epochs 2 --save-model --data-dir data"
@@ -274,7 +274,7 @@ pixi task add --feature gpu --description "Train MNIST on GPU" train-gpu "python
 ✔ Added task `train-gpu`: python src/torch_MNIST.py --epochs 14 --save-model --data-dir data, description = "Train MNIST on GPU"
 ```
 
-We can now get a nice summary of the tasks available with [`pixi task list`](https://pixi.sh/latest/reference/cli/pixi/task/list/)
+We can now get a nice summary of the tasks available with [`pixi task list`](https://pixi.prefix.dev/latest/reference/cli/pixi/task/list/)
 
 ```bash
 pixi task list
@@ -332,7 +332,7 @@ gpu = ["gpu"]
 
 ::: {note} task specific subtables
 
-You'll note that using the [`pixi task`](https://pixi.sh/latest/reference/cli/pixi/task/) CLI API adds the tasks to the feature `tasks` subtable but places all of the `task` components (e.g. `cmd`, `description`) on a single line.
+You'll note that using the [`pixi task`](https://pixi.prefix.dev/latest/reference/cli/pixi/task/) CLI API adds the tasks to the feature `tasks` subtable but places all of the `task` components (e.g. `cmd`, `description`) on a single line.
 It can sometimes be visually cleaner to give each task its own subtable, where
 
 ```toml

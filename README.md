@@ -2,7 +2,7 @@
 
 ## Development
 
-1. Install [Pixi](https://pixi.sh/)
+1. Install [Pixi](https://pixi.prefix.dev/)
 2. Clone this repository and navigate to the top level
 3. Run
 
