@@ -216,7 +216,7 @@ The particular configuration we'll be using is:
 We recommend that you run the following commands to create a new instance with this configuration:
 
 ```bash
-curl -sLO https://raw.githubusercontent.com/matthewfeickert-talks/reproducible-cuda-workflows-with-pixi-scipy-2026/refs/heads/main/book/code/setup_brev.sh
+curl -sLO https://raw.githubusercontent.com/matthewfeickert-talks/reproducible-cuda-workflows-with-pixi-scipy-2026/refs/heads/main/book/code/brev/setup_brev.sh
 brev create $(whoami)-scipy-2026 --type g7.2xlarge --startup-script @./setup_brev.sh
 ```
 
@@ -255,7 +255,7 @@ or
 
 ```bash
 # open the instance in VS Code
-brev open $(whoami)-scipy-2026
+brev open $(whoami)-scipy-2026 code
 ```
 
 #### Prepare your Brev instance

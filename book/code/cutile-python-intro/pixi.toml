@@ -1,0 +1,14 @@
+[workspace]
+channels = ["conda-forge"]
+name = "cutile-python-example"
+platforms = [ { name = "linux-64-cuda", platform = "linux-64", cuda = "13" } ]
+version = "0.1.0"
+
+[dependencies]
+numpy = ">=2.4.6,<3"
+numba-cuda = ">=0.30.4,<0.31"
+cupy = ">=14.1.1,<15"
+cutile-python = ">=1.4.0,<2"
+cuda = ">=13.3.1,<14"
+notebook = ">=7.6.0,<8"
+jupyterlab = ">=4.6.1,<5"
