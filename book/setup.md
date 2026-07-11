@@ -255,7 +255,7 @@ or
 
 ```bash
 # open the instance in VS Code
-brev open $(whoami)-scipy-2026
+brev open $(whoami)-scipy-2026 code
 ```
 
 #### Prepare your Brev instance
