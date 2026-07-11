@@ -262,6 +262,7 @@ brev shell $(whoami)-scipy-2026
 ```
 
 :::{attention} Brev instance startup
+
 The brev instance may take a few minutes to start up.
 
 Even when the cli returns the message that the instance is ready, it may take a few minutes for the instance to be fully ready to use.
@@ -269,12 +270,12 @@ Even when the cli returns the message that the instance is ready, it may take a 
 Check if the instance is ready by checking if the `pixi` command is available on the instance with:
 
 ```bash
-source ~/.bashrc
 pixi --version
 ```
 
-If this doesn't work after a few minutes, please reach out to the instructors for help.
-Or install run the commands in the [Brev instance setup script](./code/brev/setup_brev.sh) manually.
+If this doesn't work after a few minutes, please reach out to the instructors for help or run the commands in the [Brev instance setup script](./code/brev/setup_brev.sh) manually.
+
+:::
 
 #### Cleaning up after the tutorial
 
