@@ -210,38 +210,54 @@ The particular configuration we'll be using is:
 * 16GiB Ram x 4 CPUS
 * GCP
 
-You can select it from the [Brev new environment page](https://brev.nvidia.com/environment/new)
+You _can_ select it from the [Brev new environment page](https://brev.nvidia.com/environment/new)
 
 [![brev-new-environment](./images/brev-new-environment-view.png)](https://brev.nvidia.com/environment/new)
 
-**OR** run the following command to create a new instance with the same configuration:
+**BUT** we recommend that you run the following commands to create a new instance with the same configuration:
 
 ```bash
-brev create pixi-cuda --gpu g2-standard-4:nvidia-l4:1
+curl -sLO https://raw.githubusercontent.com/matthewfeickert-talks/reproducible-cuda-workflows-with-pixi-scipy-2026/refs/heads/main/book/code/setup_brev.sh
+brev create $(whoami)-scipy-2026 --type g7.2xlarge --startup-script @./setup_brev.sh
 ```
 
 #### Access the NVIDIA Brev instance on your machine
-Once the instance is created, get access to it with the following command:
+
+Once your Brev instance has been provisioned and built, connect to it either an interactive shell over SSH with
+
 ```bash
-# Open the instance in vscode:
-brev open pixi-cuda
+# start an ssh session into the instance
+brev shell $(whoami)-scipy-2026
 ```
+
+or
+
 ```bash
-# Or start an ssh session into the instance
-brev shell pixi-cuda
+# open the instance in VS Code
+brev open $(whoami)-scipy-2026
 ```
 
 #### Prepare your Brev instance
 
-Once you have access to the Brev instance, you can use it like any other Linux machine
-and install any additional software you need.
-Please install the following software on your Brev instance:
+Once you have access to the Brev instance, you can use it like any other Linux machine and install any additional software you need.
+Ensure that your `~/.bashrc` has the following at the bottom
 
 ```bash
-# Pixi
-curl -fsSL https://pixi.sh/install.sh | sh
-echo -e '\neval "$(pixi completion --shell bash)"' >> ~/.bashrc
-source ~/.bashrc
-# Additional tools
-pixi global install gh
+export PATH="/home/ubuntu/.pixi/bin:$PATH"
+eval "$(pixi completion --shell bash)"
+```
+
+If it doesn't, the startup script failed to run, and you should execute the following in your shell
+
+
+```bash
+curl -fsSL https://pixi.sh/install.sh | bash
+echo 'eval "$(pixi completion --shell bash)"' >> ${HOME}/.bashrc
+. ${HOME}/.bashrc
+```
+
+Please install the following useful software on your Brev instance:
+
+```bash
+pixi global install git gh bat
 ```
