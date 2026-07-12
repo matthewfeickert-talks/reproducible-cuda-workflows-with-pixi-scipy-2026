@@ -50,7 +50,7 @@ environments:
       - conda: https://conda.anaconda.org/conda-forge/linux-64/libuuid-2.42.2-h5347b49_0.conda
       - conda: https://conda.anaconda.org/conda-forge/linux-64/libuv-1.52.1-h280c20c_0.conda
       - conda: https://conda.anaconda.org/conda-forge/linux-64/libzlib-1.3.2-h25fd6f3_2.conda
-      - conda: https://conda.anaconda.org/conda-forge/linux-64/lychee-0.22.0-he64ecbb_1.conda
+      - conda: https://conda.anaconda.org/conda-forge/linux-64/lychee-0.24.2-he64ecbb_0.conda
       - conda: https://conda.anaconda.org/conda-forge/linux-64/ncurses-6.6-hdb14827_0.conda
       - conda: https://conda.anaconda.org/conda-forge/linux-64/nodejs-26.4.0-hc039f44_0.conda
       - conda: https://conda.anaconda.org/conda-forge/linux-64/openssl-3.6.3-h35e630c_0.conda
@@ -116,7 +116,7 @@ environments:
       - conda: https://conda.anaconda.org/conda-forge/osx-64/libsqlite-3.53.3-h8f8c405_0.conda
       - conda: https://conda.anaconda.org/conda-forge/osx-64/libuv-1.52.1-ha3d0635_0.conda
       - conda: https://conda.anaconda.org/conda-forge/osx-64/libzlib-1.3.2-hbb4bfdb_2.conda
-      - conda: https://conda.anaconda.org/conda-forge/osx-64/lychee-0.22.0-hc2f27db_1.conda
+      - conda: https://conda.anaconda.org/conda-forge/osx-64/lychee-0.24.2-h651e3a3_0.conda
       - conda: https://conda.anaconda.org/conda-forge/osx-64/ncurses-6.6-hcc0dc9a_0.conda
       - conda: https://conda.anaconda.org/conda-forge/osx-64/nodejs-26.4.0-h3e09207_0.conda
       - conda: https://conda.anaconda.org/conda-forge/osx-64/openssl-3.6.3-hc881268_0.conda
@@ -164,7 +164,7 @@ environments:
       - conda: https://conda.anaconda.org/conda-forge/osx-arm64/libsqlite-3.53.3-h1b79a29_0.conda
       - conda: https://conda.anaconda.org/conda-forge/osx-arm64/libuv-1.52.1-h1a92334_0.conda
       - conda: https://conda.anaconda.org/conda-forge/osx-arm64/libzlib-1.3.2-h8088a28_2.conda
-      - conda: https://conda.anaconda.org/conda-forge/osx-arm64/lychee-0.22.0-h9a5e2f5_1.conda
+      - conda: https://conda.anaconda.org/conda-forge/osx-arm64/lychee-0.24.2-h17e24d4_0.conda
       - conda: https://conda.anaconda.org/conda-forge/osx-arm64/ncurses-6.6-h1d4f5a5_0.conda
       - conda: https://conda.anaconda.org/conda-forge/osx-arm64/nodejs-26.4.0-h00e74ec_0.conda
       - conda: https://conda.anaconda.org/conda-forge/osx-arm64/openssl-3.6.3-hd24854e_0.conda
@@ -202,7 +202,7 @@ environments:
       - conda: https://conda.anaconda.org/conda-forge/win-64/libmpdec-4.0.0-hfd05255_1.conda
       - conda: https://conda.anaconda.org/conda-forge/win-64/libsqlite-3.53.3-hf5d6505_0.conda
       - conda: https://conda.anaconda.org/conda-forge/win-64/libzlib-1.3.2-hfd05255_2.conda
-      - conda: https://conda.anaconda.org/conda-forge/win-64/lychee-0.22.0-h243827c_0.conda
+      - conda: https://conda.anaconda.org/conda-forge/win-64/lychee-0.24.2-hb3eb754_0.conda
       - conda: https://conda.anaconda.org/conda-forge/win-64/nodejs-26.4.0-h80d1838_0.conda
       - conda: https://conda.anaconda.org/conda-forge/win-64/openssl-3.6.3-hf411b9b_0.conda
       - conda: https://conda.anaconda.org/conda-forge/win-64/python-3.14.6-h4b44e0e_100_cp314.conda
@@ -544,19 +544,19 @@ packages:
     - libzlib >=1.3.2,<2.0a0
   size: 63629
   timestamp: 1774072609062
-- conda: https://conda.anaconda.org/conda-forge/linux-64/lychee-0.22.0-he64ecbb_1.conda
-  sha256: 115ece6cace4b607c5a670326140f5f3dbdcd737c38a001f1aaa6a3183b1d475
-  md5: 79e6a90a947014315502bfa04d0b5f8d
+- conda: https://conda.anaconda.org/conda-forge/linux-64/lychee-0.24.2-he64ecbb_0.conda
+  sha256: 3fd9108a9af3ad8f5124b9dc4ec4c0169e27e6379100374844b6a058ca8e8988
+  md5: 5ef12daae06f2228dcb37c95a8db1881
   depends:
-  - __glibc >=2.17,<3.0.a0
   - libgcc >=14
-  - openssl >=3.5.4,<4.0a0
+  - __glibc >=2.17,<3.0.a0
+  - openssl >=3.5.6,<4.0a0
   constrains:
   - __glibc >=2.17
   license: Apache-2.0 OR MIT
   run_exports: {}
-  size: 5907664
-  timestamp: 1765062488326
+  size: 5789257
+  timestamp: 1777662729855
 - conda: https://conda.anaconda.org/conda-forge/linux-64/ncurses-6.6-hdb14827_0.conda
   sha256: fc89f74bbe362fb29fa3c037697a89bec140b346a2469a90f7936d1d7ea4d8a3
   md5: fc21868a1a5aacc937e7a18747acb8a5
@@ -1165,18 +1165,18 @@ packages:
     - libzlib >=1.3.2,<2.0a0
   size: 59000
   timestamp: 1774073052242
-- conda: https://conda.anaconda.org/conda-forge/osx-64/lychee-0.22.0-hc2f27db_1.conda
-  sha256: e0a08d320cc4108bee643cd6999f910186ecaa1c7b38af136df7b7f3f758bbcf
-  md5: 607aec2fa983a3ebda7079a43ef7b445
+- conda: https://conda.anaconda.org/conda-forge/osx-64/lychee-0.24.2-h651e3a3_0.conda
+  sha256: 76f52cb9891ba0cb20c24cfd1e1412142c88f4afba7f69cb7ece4ed7928e5f04
+  md5: 226175c1e553778a6c290c657d6bebb6
   depends:
-  - __osx >=10.13
-  - openssl >=3.5.4,<4.0a0
+  - __osx >=11.0
+  - openssl >=3.5.6,<4.0a0
   constrains:
   - __osx >=10.13
   license: Apache-2.0 OR MIT
   run_exports: {}
-  size: 5772624
-  timestamp: 1765062501576
+  size: 5738020
+  timestamp: 1777662907024
 - conda: https://conda.anaconda.org/conda-forge/osx-64/ncurses-6.6-hcc0dc9a_0.conda
   sha256: f5f7e006ff4271305ab4cc08eedd855c67a571793c3d18aff73f645f088a8cae
   md5: 31b8740cf1b2588d4e61c81191004061
@@ -1562,18 +1562,18 @@ packages:
     - libzlib >=1.3.2,<2.0a0
   size: 47759
   timestamp: 1774072956767
-- conda: https://conda.anaconda.org/conda-forge/osx-arm64/lychee-0.22.0-h9a5e2f5_1.conda
-  sha256: 65b225c75e94f4d5912fda611a0078ff6c6ab671cf118ac3f0c80976d6848367
-  md5: cf4df431224f0969d3eac2cbabdfc085
+- conda: https://conda.anaconda.org/conda-forge/osx-arm64/lychee-0.24.2-h17e24d4_0.conda
+  sha256: f8d8397e8aa3077ebaeffdd18f7aaf0fce4188a3dbd08514ed85dc34acee4220
+  md5: 0b13f105d1195e1b388706f8eb7f0a03
   depends:
   - __osx >=11.0
-  - openssl >=3.5.4,<4.0a0
+  - openssl >=3.5.6,<4.0a0
   constrains:
   - __osx >=11.0
   license: Apache-2.0 OR MIT
   run_exports: {}
-  size: 5449561
-  timestamp: 1765062508697
+  size: 5382476
+  timestamp: 1777662876427
 - conda: https://conda.anaconda.org/conda-forge/osx-arm64/ncurses-6.6-h1d4f5a5_0.conda
   sha256: 4ea6c620b87bd1d42bb2ccc2c87cd2483fa2d7f9e905b14c223f11ff3f4c455d
   md5: 343d10ed5b44030a2f67193905aea159
@@ -1845,18 +1845,18 @@ packages:
     - libzlib >=1.3.2,<2.0a0
   size: 58347
   timestamp: 1774072851498
-- conda: https://conda.anaconda.org/conda-forge/win-64/lychee-0.22.0-h243827c_0.conda
-  sha256: 60d233e53603d5a9f174e8161605ec6e5027b3561640ba1d48c80991933f7737
-  md5: 18227a525152dc77ec3c230d03bc0d0d
+- conda: https://conda.anaconda.org/conda-forge/win-64/lychee-0.24.2-hb3eb754_0.conda
+  sha256: 826077733e3c251831d7b7c9cdb27da4b661044363343c5614527a618cd94d40
+  md5: f06076ddc8c0f46c64900f1c8b479325
   depends:
-  - openssl >=3.5.4,<4.0a0
-  - ucrt >=10.0.20348.0
   - vc >=14.3,<15
   - vc14_runtime >=14.44.35208
+  - ucrt >=10.0.20348.0
+  - openssl >=3.5.6,<4.0a0
   license: Apache-2.0 OR MIT
   run_exports: {}
-  size: 5438376
-  timestamp: 1764994121000
+  size: 6020917
+  timestamp: 1777662847120
 - conda: https://conda.anaconda.org/conda-forge/win-64/nodejs-26.4.0-h80d1838_0.conda
   sha256: e2bd6ca2fd92252ffc735b684f3d6d13b1408827f4df3715fe21cd6b50c3d430
   md5: e682530a6c2c69b86a6c19de2e20353a
