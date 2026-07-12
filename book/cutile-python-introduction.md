@@ -47,3 +47,28 @@ Now make sure that the default environment containing all the dependencies is in
 ```
 pixi install
 ```
+
+## Interacting with the cuTile notebook on Brev
+
+To be able to use the environment with cuTile in the Pixi manifest and use the Jupyter notebook `cutile-python-intro.ipynb` on Brev there are two options.
+
+### Use the Brev instance's JupyterLab
+
+1. Visit your Brev instance's "GPU environments" page on https://brev.nvidia.com/ (or just login again with `brev login`).
+1. Click on your current running instance (which should be named your values of `$(whoami)-scipy-2026`).
+1. Click the "Open Notebook" button on the right-hand side of the screen.
+   This will launch a Jupyter Lab instance on your Brev instance.
+
+   ![brev-open-notebook-view](./images/brev-open-notebook-view.png)
+
+1. Using JupyterLab's file browser on the left-hand side of the screen navigate to `reproducible-cuda-workflows-with-pixi-scipy-2026/book/code/cutile-python-intro`.
+1. Click on the `cutile-python-intro.ipynb` notebook to open it.
+1. Switch the ipykernel being used for the notebook by clicking on default kernel name on the upper-right-hand side of the screen and in the "Select Kernel" menu select "Python (Pixi)" (under "Start python Kernel") and then click "Select".
+
+   ![switch-kernel-button](./images/switch-kernel-button.png)
+
+   ![select-kernel-view](./images/select-kernel-view.png)
+
+   The running kernel name should now show "Python (Pixi)".
+
+You can now proceed with the notebook example.
