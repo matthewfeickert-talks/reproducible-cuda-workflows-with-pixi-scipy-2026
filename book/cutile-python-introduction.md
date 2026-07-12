@@ -63,7 +63,7 @@ To be able to use the environment with cuTile in the Pixi manifest and use the J
 1. In your VS Code file browser, navigate to `reproducible-cuda-workflows-with-pixi-scipy-2026/book/code/cutile-python-intro/`.
 1. Click on the `cutile-python-intro.ipynb` notebook to open it.
 1. Switch the ipykernel being used for the notebook by clicking on the "Select Kernel" button on the upper-right-hand side of the screen and selecting the "Install/Enable suggested extensions Python + Jupyter".
-   This will install the VS Code extensions groups Python and Jupyter into your Brev instance.
+   This will install the VS Code extensions groups Python and Jupyter into your Brev instance if they are not already (they should be already as part of the Brev instance startup script).
 
    ![install-vscode-extensions-view](./images/install-vscode-extensions-view.png)
 
