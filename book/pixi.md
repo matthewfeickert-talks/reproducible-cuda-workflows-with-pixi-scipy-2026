@@ -472,6 +472,7 @@ Use a **feature** to define a reusable workflow layer.
 Use an **environment** to choose which layers Pixi should install and run.
 Use `no-default-feature = true` when an environment should not include the shared runtime dependencies.
 
+(preview-pixi-build)=
 # Building packages
 So far, we have used Pixi to manage environments and tasks.
 Pixi can also build conda packages from source through build backends.

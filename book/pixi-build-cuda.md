@@ -1,6 +1,6 @@
 # Pixi Build: CUDA packages from source
 
-Earlier, in the [Pixi introduction](pixi.md#preview-pixi-build), we saw a teaser: besides managing environments and tasks, Pixi can also *build* conda packages from source.
+Earlier, in the [Pixi introduction](#preview-pixi-build), we saw a teaser: besides managing environments and tasks, Pixi can also *build* conda packages from source.
 This chapter is where we return to that.
 
 We will build **two** conda packages, both computing the same Mandelbrot fractal on the GPU, each through a different [Pixi Build](https://pixi.prefix.dev/latest/build/backends/) backend:
