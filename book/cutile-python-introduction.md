@@ -52,7 +52,35 @@ pixi install
 
 To be able to use the environment with cuTile in the Pixi manifest and use the Jupyter notebook `cutile-python-intro.ipynb` on Brev there are two options.
 
-### Use the Brev instance's JupyterLab
+### Connect VS Code to the Brev instance
+
+1. Open a connection from your local machine to the Brev instance with VS Code.
+
+   ```
+   brev open $(whoami)-scipy-2026 code
+   ```
+
+1. In your VS Code file browser, navigate to `reproducible-cuda-workflows-with-pixi-scipy-2026/book/code/cutile-python-intro/`.
+1. Click on the `cutile-python-intro.ipynb` notebook to open it.
+1. Switch the ipykernel being used for the notebook by clicking on the "Select Kernel" button on the upper-right-hand side of the screen and selecting the "Install/Enable suggested extensions Python + Jupyter".
+   This will install the VS Code extensions groups Python and Jupyter into your Brev instance.
+
+   ![install-vscode-extensions-view](./images/install-vscode-extensions-view.png)
+
+1. After the extensions install, the "Select Another Kernel" menu should open.
+   Select "Jupyter Kernel" from the dropdown menu.
+
+   ![select-another-kernel-view](./images/select-another-kernel-view.png)
+
+1. Select "Python (Pixi) `.pixi/bin/pixi`" from the "Select a Jupyter Kernel" menu.
+
+   ![select-jupyter-kernel-view](./images/select-jupyter-kernel-view.png)
+
+   The running kernel name should now show "Python (Pixi)".
+
+You can now execute the notebook in VS Code using the environment from the Pixi workspace!
+
+### Use the Brev instance's Jupyter Lab
 
 1. Visit your Brev instance's "GPU environments" page on https://brev.nvidia.com/ (or just login again with `brev login`).
 1. Click on your current running instance (which should be named your values of `$(whoami)-scipy-2026`).
@@ -61,9 +89,9 @@ To be able to use the environment with cuTile in the Pixi manifest and use the J
 
    ![brev-open-notebook-view](./images/brev-open-notebook-view.png)
 
-1. Using JupyterLab's file browser on the left-hand side of the screen navigate to `reproducible-cuda-workflows-with-pixi-scipy-2026/book/code/cutile-python-intro`.
+1. Using JupyterLab's file browser on the left-hand side of the screen navigate to `reproducible-cuda-workflows-with-pixi-scipy-2026/book/code/cutile-python-intro/`.
 1. Click on the `cutile-python-intro.ipynb` notebook to open it.
-1. Switch the ipykernel being used for the notebook by clicking on default kernel name on the upper-right-hand side of the screen and in the "Select Kernel" menu select "Python (Pixi)" (under "Start python Kernel") and then click "Select".
+1. Switch the ipykernel being used for the notebook by clicking on the default kernel name on the upper-right-hand side of the screen and in the "Select Kernel" menu select "Python (Pixi)" (under "Start python Kernel") and then click "Select".
 
    ![switch-kernel-button](./images/switch-kernel-button.png)
 
@@ -71,4 +99,8 @@ To be able to use the environment with cuTile in the Pixi manifest and use the J
 
    The running kernel name should now show "Python (Pixi)".
 
-You can now proceed with the notebook example.
+You can now execute the notebook in Jupyter Lab using the environment from the Pixi workspace!
+
+## Explore cuTile Python in the Jupyter notebook
+
+You can now proceed with [the cuTile notebook example](https://github.com/matthewfeickert-talks/reproducible-cuda-workflows-with-pixi-scipy-2026/blob/main/book/code/cutile-python-intro/cutile-python-intro.ipynb).
