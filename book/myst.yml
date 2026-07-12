@@ -50,6 +50,7 @@ project:
     - file: introduction.md
     - file: pixi.md
     - file: pixi-exercise.md
+    - file: cutile-python-introduction.md
     - file: pixi-build-cuda.md
     - file: pixi-build-cuda-exercise.md
     - title: Bonus Tutorials
