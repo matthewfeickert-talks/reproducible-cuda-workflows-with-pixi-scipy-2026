@@ -91,7 +91,7 @@ You can now execute the notebook in VS Code using the environment from the Pixi 
 
 1. Using JupyterLab's file browser on the left-hand side of the screen navigate to `reproducible-cuda-workflows-with-pixi-scipy-2026/book/code/cutile-python-intro/`.
 1. Click on the `cutile-python-intro.ipynb` notebook to open it.
-1. Switch the ipykernel being used for the notebook by clicking on the default kernel name on the upper-right-hand side of the screen and in the "Select Kernel" menu select "Python (Pixi)" (under "Start python Kernel") and then click "Select".
+1. Switch the ipykernel being used for the notebook by clicking on the default kernel name (Python 3 (ipykernel)) on the upper-right-hand side of the screen and in the "Select Kernel" menu select "Python (Pixi)" (under "Start python Kernel") and then click "Select".
 
    ![switch-kernel-button](./images/switch-kernel-button.png)
 
