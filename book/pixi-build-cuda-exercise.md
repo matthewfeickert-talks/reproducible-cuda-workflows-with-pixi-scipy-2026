@@ -1,4 +1,4 @@
-# Pixi Build: exercises
+# Pixi Build: Exercises
 
 In these exercises you will build the [`combined-build-example`](https://github.com/matthewfeickert-talks/reproducible-cuda-workflows-with-pixi-scipy-2026/tree/main/book/code/combined-build-example) from scratch: one Pixi workspace that builds **two** conda packages, both computing the same Mandelbrot fractal through two [Pixi Build](https://pixi.prefix.dev/latest/build/backends/) backends.
 See the [Pixi Build introduction chapter](pixi-build-cuda.md) for the concepts, and the [Pixi Build docs](https://pixi.prefix.dev/latest/build/getting_started/) for the full reference.
