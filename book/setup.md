@@ -169,6 +169,7 @@ cd reproducible-cuda-scipy-2026
 
 Now you have a GitHub repository set up to store your work from this tutorial.
 
+(prepare-brev-instance)=
 ## Prepare Brev Instance
 #### Create an NVIDIA Brev account
 

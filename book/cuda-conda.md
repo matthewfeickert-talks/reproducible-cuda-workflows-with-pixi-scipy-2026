@@ -84,6 +84,7 @@ Global
 
 ```
 
+(cuda-use-with-pixi)=
 ## CUDA use with Pixi
 
 To be able to effectively use CUDA conda packages with Pixi, we declare the CUDA virtual package on a [rich platform entry](https://pixi.prefix.dev/latest/workspace/multi_platform_configuration/#declaring-virtual-packages-per-platform).
@@ -108,6 +109,7 @@ cd ~/reproducible-cuda-scipy-2026/cuda-example
 ✔ Created /home/<username>/reproducible-cuda-scipy-2026/cuda-example/pixi.toml
 ```
 
+(adding-a-cuda-rich-platform)=
 ### Adding a CUDA rich platform
 We are going to specify a `cuda` virtual package on the Linux platform entry.
 Give the entry an explicit `name` so we can refer to it later from features, target tables, and CLI commands.
@@ -200,7 +202,7 @@ However, there are many situations in which you want to **solve an environment f
 There are three important features we're going to use here:
 - rich platform entries, to declare CUDA virtual packages on only the platforms that need them.
 - `target` specific configuration, to add dependencies for a specific platform entry.
-- `feature` specific configuration, to create [multiple `environments`](./pixi.md#features-and-environments).
+- `feature` specific configuration, to create [multiple `environments`](#features-and-environments).
 
 If we make the Pixi workspace multiplatform while keeping the CUDA solve separate
 

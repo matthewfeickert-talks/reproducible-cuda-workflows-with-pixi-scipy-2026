@@ -410,6 +410,7 @@ platforms = [
 
 This lets one workspace describe both local CPU development and remote GPU execution with the platform requirements for each made explicit.
 
+(features-and-environments)=
 ## Features and environments
 Pixi separates reusable configuration from the environments you actually run.
 

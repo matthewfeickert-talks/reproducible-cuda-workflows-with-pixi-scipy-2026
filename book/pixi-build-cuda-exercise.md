@@ -9,7 +9,7 @@ The application source (the cuTile kernel and the CUDA C++ kernel) is *given*. T
 ::: {warning} These exercises need a GPU
 Building the CUDA C++ package needs the CUDA toolchain (Pixi installs it for you from conda-forge), and *running* either package needs an NVIDIA GPU.
 
-Work through this chapter on your [Brev instance](setup.md#prepare-brev-instance).
+Work through this chapter on your [Brev instance](#prepare-brev-instance).
 :::
 
 :::::{tip} Exercise 1: Create the build workspace

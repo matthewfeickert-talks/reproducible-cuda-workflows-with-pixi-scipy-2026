@@ -53,7 +53,7 @@ combined-build/
 # Enabling Pixi Build
 
 Because it is a preview feature, source-built dependencies require `preview = ["pixi-build"]` in the `[workspace]` table.
-Because both packages target the GPU, the workspace also declares a [rich CUDA platform](cuda-conda.md#cuda-use-with-pixi) (see [multi-platform configuration](https://pixi.prefix.dev/latest/workspace/multi_platform_configuration/#declaring-virtual-packages-per-platform)) so the solver picks GPU-enabled builds:
+Because both packages target the GPU, the workspace also declares a [rich CUDA platform](#cuda-use-with-pixi) (see [multi-platform configuration](https://pixi.prefix.dev/latest/workspace/multi_platform_configuration/#declaring-virtual-packages-per-platform)) so the solver picks GPU-enabled builds:
 
 ```{code} toml
 :filename: pixi.toml
@@ -65,7 +65,7 @@ platforms = [{ platform = "linux-64", cuda = "13" }]
 preview = ["pixi-build"]
 ```
 
-The `cuda = "13"` entry declares the `__cuda` virtual package on this platform, exactly as we did in the [CUDA conda packages chapter](cuda-conda.md#adding-a-cuda-rich-platform).
+The `cuda = "13"` entry declares the `__cuda` virtual package on this platform, exactly as we did in the [CUDA conda packages chapter](#adding-a-cuda-rich-platform).
 
 ::::{note} Also build on Windows
 CUDA runs on Windows too, so the same workspace can build for a Windows machine with an NVIDIA GPU. Add a second rich platform:
