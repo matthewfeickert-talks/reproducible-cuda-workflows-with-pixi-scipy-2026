@@ -410,6 +410,7 @@ platforms = [
 
 This lets one workspace describe both local CPU development and remote GPU execution with the platform requirements for each made explicit.
 
+(features-and-environments)=
 ## Features and environments
 Pixi separates reusable configuration from the environments you actually run.
 
@@ -472,6 +473,7 @@ Use a **feature** to define a reusable workflow layer.
 Use an **environment** to choose which layers Pixi should install and run.
 Use `no-default-feature = true` when an environment should not include the shared runtime dependencies.
 
+(preview-pixi-build)=
 # Building packages
 So far, we have used Pixi to manage environments and tasks.
 Pixi can also build conda packages from source through build backends.

@@ -1,7 +1,10 @@
 [workspace]
 channels = ["conda-forge"]
 name = "cutile-python-example"
-platforms = [ { name = "linux-64-cuda", platform = "linux-64", cuda = "13" } ]
+platforms = [
+  { name = "linux-64-cuda", platform = "linux-64", cuda = "13" },
+  { name = "win-64-cuda", platform = "win-64", cuda = "13" }
+]
 version = "0.1.0"
 
 [dependencies]

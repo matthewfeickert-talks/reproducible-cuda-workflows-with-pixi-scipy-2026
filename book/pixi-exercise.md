@@ -1,4 +1,4 @@
-# Pixi: exercises
+# Pixi: Exercises
 This page contains exercises to help you practice the concepts learned in the Pixi introduction. Each exercise is designed to reinforce your understanding of Pixi's features and capabilities.
 
 ::: {warning}
