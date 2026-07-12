@@ -8,3 +8,9 @@ For the purposes of this tutorial, we are not going to fully work through all of
 Instead, we are going to take a high-level approach to learning the cuTile Python API through working through a cuTile demonstration in a [Jupyter notebook in the tutorial source repository](https://github.com/matthewfeickert-talks/reproducible-cuda-workflows-with-pixi-scipy-2026/blob/main/book/code/cutile-python-intro/cutile-python-intro.ipynb).
 
 ## Move work over to Brev
+
+Use of CUDA requires an NVIDIA GPU, so the following sections of the tutorial will require access to a machine with an NVIDIA GPU and CUDA driver.
+We will use the NVIDIA Brev platform to achieve this.
+Part of the tutorial setup [covered Brev setup, login, and instance provisioning](#prepare-brev-instance).
+Return to that section now and provision a Brev instance as described.
+When you have finished with that return to this section.
