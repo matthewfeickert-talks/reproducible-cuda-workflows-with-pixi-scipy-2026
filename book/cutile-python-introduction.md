@@ -33,4 +33,17 @@ cd book/code/cutile-python-intro
 We have already provided a Pixi workspace for cuTile, but let's quickly inspect it to make sure that you could create it yourself.
 
 ```{literalinclude} code/cutile-python-intro/pixi.toml
+:linenos:
+:emphasize-lines: 4,5,6,14,16,17
+```
+
+In the manifest we:
+* Created rich platforms for CUDA support that declare the `__cuda` virtual package on the base platforms
+* Added `cutile-python` from conda-forge as well as all of the additional packages used in the notebook
+* Added `notebook` and `jupyterlab` to both provide the `ipykernel` dependency needed for interacting through VS Code and to additionally provide Jupyter Lab support for local use
+
+Now make sure that the default environment containing all the dependencies is installed for use with
+
+```
+pixi install
 ```
