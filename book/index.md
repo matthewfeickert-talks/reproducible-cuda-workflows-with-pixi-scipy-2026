@@ -74,3 +74,4 @@ This tutorial was supported by the [University of Wisconsin&ndash;Madison Data S
 ## Acknowledgements
 
 Special thanks to [Tim de Jager](https://github.com/tdejager) and [Wolf Vollprecht](https://github.com/wolfv) of prefix.dev GmBH and [Daniel Ching](https://github.com/carterbox) of NVIDIA for their review, feedback, and contributions to this tutorial.
+Special thanks to [Nick Hodgskin](https://github.com/veckothegecko) for volunteering to serve as a teaching assistant for this tutorial.
