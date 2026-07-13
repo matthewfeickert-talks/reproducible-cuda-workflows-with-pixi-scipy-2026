@@ -51,17 +51,13 @@ The focus will be on CUDA applications, such as machine learning frameworks and 
 
 * Break, grab a snack and stretch your legs.
 
-**02:45 &ndash; 03:10 (25 min):**
+**02:45 &ndash; 03:15 (30 min):**
 
-* [Intro to Machine Learning applications with Pixi](ml-example.md), an overview of how to use Pixi for machine learning applications, including PyTorch.
+* [Building CUDA packages from source with Pixi Build](pixi-build-cuda.md), Introduction to building CUDA packages from source with Pixi Build.
 
-**03:10 &ndash; 03:30 (20 min):**
+**03:15 &ndash; 03:50 (35 min):**
 
-* [General hardware acceleration using CUDA](cuda-hardware-acceleration.md), an overview of how to use CUDA for general hardware acceleration like replacing NumPy with CuPy.
-
-**03:30 &ndash; 03:50 (30 min):**
-
-* [Building CUDA packages from source with Pixi Build](pixi-build-cuda.md), and its [exercises](pixi-build-cuda-exercise.md): package your own CUDA C++ and Python/cuTile code as conda packages.
+* [Building Package Exercises](pixi-build-cuda-exercise.md), package your own CUDA C++ and Python/cuTile code as conda packages.
 
 **03:50 &ndash; 04:00 (10 min):**
 
