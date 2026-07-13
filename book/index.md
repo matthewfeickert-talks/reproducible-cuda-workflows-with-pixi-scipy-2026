@@ -55,11 +55,11 @@ The focus will be on CUDA applications, such as machine learning frameworks and 
 
 * [Building CUDA packages from source with Pixi Build](pixi-build-cuda.md), Introduction to building CUDA packages from source with Pixi Build.
 
-**03:15 &ndash; 03:55 (40 min):**
+**03:15 &ndash; 03:50 (35 min):**
 
 * [Building Package Exercises](pixi-build-cuda-exercise.md), package your own CUDA C++ and Python/cuTile code as conda packages.
 
-**03:55 &ndash; 04:00 (5 min):**
+**03:50 &ndash; 04:00 (10 min):**
 
 * Discussion over solutions to exercises.
 * Time for participants to start exploring their own projects with Pixi and CUDA.
