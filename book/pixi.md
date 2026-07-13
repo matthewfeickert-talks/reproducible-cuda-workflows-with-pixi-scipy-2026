@@ -287,6 +287,30 @@ Pixi has a few special types of dependencies that you can use in the project.
 | `editable` (`pypi` only) | Install a package in editable mode | `editable = true` |
 | `url` | Install a package from a URL | `url = "https://example.com/package.whl"` |
 
+An example of what this might look like in the Pixi manifest is
+
+```{code} toml
+:filename: pixi.toml
+# Git repository of a Pixi package
+[dependencies.git-package]
+# Git repository
+git = "https://github.com/org/repo"
+# Git branch
+branch = "main"
+# Subdirectory within repo
+subdirectory = "packages/mypackage"
+
+[dependencies.tagged-git-package]
+# Git with specific tag
+git = "https://github.com/org/repo"
+tag = "v1.0.0"
+
+[dependencies.rev-git-package]
+# Git with specific revision
+git = "https://github.com/org/repo"
+rev = "abc123def"
+```
+
 
 ## Lockfile
 The lockfile is a file that contains the exact versions of the packages that were installed in the environment.
@@ -347,7 +371,6 @@ pixi task add hello "echo Hello World"
 This will add a new task called `hello` to the project, which will print `Hello World` to the console.
 ```{code} toml
 :filename: pixi.toml
-:linenos:
 [tasks]
 hello = "echo Hello World"
 ```
@@ -495,7 +518,6 @@ A workspace can then depend on a local source package:
 
 ```{code} toml
 :filename: pixi.toml
-:linenos:
 [dependencies]
 my-library = { path = "src/my-library" }
 ```
