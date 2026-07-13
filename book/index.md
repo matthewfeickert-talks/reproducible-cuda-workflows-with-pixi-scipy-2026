@@ -15,7 +15,8 @@ The focus will be on CUDA applications, such as machine learning frameworks and 
 * Tutorial name: [Reproducible CUDA Accelerated Workflows for Scientists with Pixi](https://pretalx.com/scipy-2026/talk/9FQMMN/)
 * Date: 2026-07-13 (Monday)
 * Time: 13:30&ndash;17:30 Central
-* Location: University Hall, University of Minnesota
+* Location: Room [HSEC 2-138](https://healthclassrooms.umn.edu/classrooms/hsec-2-138), Health Sciences Education Center, University of Minnesota
+   - 526 Delaware Street SE, Minneapolis, MN 55455
 
 ## Rough Outline
 
