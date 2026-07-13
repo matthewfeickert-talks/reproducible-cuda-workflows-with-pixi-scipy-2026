@@ -22,7 +22,7 @@ The focus will be on CUDA applications, such as machine learning frameworks and 
 
 **00:00 &ndash; 00:05 (5 min):**
 
-* Personal Introductions
+* Personal Introductions.
 
 **00:05 &ndash; 00:15 (10 min):**
 
@@ -38,7 +38,7 @@ The focus will be on CUDA applications, such as machine learning frameworks and 
 
 **01:00 &ndash; 01:40 (40 min):**
 
-* [Pixi exercises](pixi-exercise.md), play around with Pixi and create a reproducible Python environment
+* [Pixi exercises](pixi-exercise.md), play around with Pixi and create a reproducible Python environment.
 
 **01:40 &ndash; 01:55 (15 min):**
 
@@ -46,7 +46,7 @@ The focus will be on CUDA applications, such as machine learning frameworks and 
 
 **01:55 &ndash; 02:35 (40 min):**
 
-* [Introduction to CUDA and CUDA conda packages](cuda-conda.md), the history and overview of how to use CUDA with Pixi and conda packages.
+* [Introduction to CUDA and cuTile Python](cutile-python-introduction.md), overview of CUDA and introduction to the cuTile Python library.
 
 **02:35 &ndash; 02:45 (10 min):**
 
