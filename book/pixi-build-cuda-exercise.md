@@ -534,8 +534,9 @@ cuda_compiler_version = ["13.1"]
 [dependencies]
 cuda-brot = { path = "src/cuda-brot" }
 :::
+5. Define and run a `cuda-brot` task.
+The first run compiles with nvcc; this can take a little while.
 ```bash
-# 5 (first run compiles with nvcc, this can take a little while)
 pixi task add cuda-brot cuda-brot --description "Render the classic Mandelbrot set (CUDA C++)"
 pixi run cuda-brot
 ```
