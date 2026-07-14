@@ -11,7 +11,7 @@ cd ~/reproducible-cuda-scipy-2026
 
 :::::{tip} Exercise 1: Creating a project
 1. Create a new Pixi project named `my-project` using the command line.
-2. Add `python` 3.13 or 3.14 as a dependency to your project.
+2. Add `python` from the 3.13 or 3.14 release series as a dependency to your project.
 3. Use the Pixi installed Python to print `"Hello, Pixi!"` to the console.
 4. Run a command to print the version of Python used in your project. You can see the location of the interpreter by running: `import sys;print(sys.executable)`
 
