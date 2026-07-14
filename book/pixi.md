@@ -358,7 +358,7 @@ packages:
 ```
 
 # Managing tasks
-Pixi has a built-in {term}cross-platform task runner that allows you to define tasks in the manifest.
+Pixi has a built-in {term}`cross-platform` task runner that allows you to define tasks in the manifest.
 This is a great way to share tasks with others and to ensure that the same tasks are run in the same environment.
 The tasks are defined in the `[tasks]` section.
 
