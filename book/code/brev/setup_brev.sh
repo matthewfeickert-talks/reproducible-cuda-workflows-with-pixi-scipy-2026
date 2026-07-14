@@ -6,7 +6,7 @@ echo 'eval "$(pixi completion --shell bash)"' >> ${HOME}/.bashrc
 
 # Add extra tools that might be useful for the exercises
 # Need to use direct path to Pixi as sourcing ~/.bashrc causes interrupt
-$HOME/.pixi/bin/pixi global install bat curl git gh nvim rattler-build pixi-browse tree
+$HOME/.pixi/bin/pixi global install bat curl git gh nvim nvtop rattler-build pixi-browse tree
 
 # Register a global "Python (Pixi)" Jupyter kernel for VS Code Remote.
 curl -sL https://raw.githubusercontent.com/matthewfeickert-talks/reproducible-cuda-workflows-with-pixi-scipy-2026/refs/heads/main/book/code/brev/setup_pixi_kernel.sh | bash
