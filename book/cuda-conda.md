@@ -402,7 +402,7 @@ if __name__ == "__main__":
 ```
 
 ```bash
-pixi run python torch_detect_GPU.py
+pixi run --platform linux-64-cuda python ./torch_detect_GPU.py
 ```
 ```
 PyTorch build CUDA version: 12.6
@@ -412,7 +412,7 @@ PyTorch build NCCL version: (2, 27, 3)
 Number of GPUs found on system: 1
 
 Active GPU index: 0
-Active GPU name: NVIDIA RTX PRO 4500 Blackwell Server Edition
+Active GPU name: NVIDIA L4
 ```
 
 ## Exercise: Multi-environment Pixi workspaces
