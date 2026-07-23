@@ -207,9 +207,9 @@ Later on in the [SciPy 2026 tutorial](https://pretalx.com/scipy-2026/talk/9FQMMN
 
 The particular configuration we'll be using is:
 
-* 1x NVIDIA RTX PRO 4500 GPU
-* 32GiB VRAM
-* 32GiB Ram x 8 CPUS
+* 1x NVIDIA L4 GPU
+* 22.35GiB VRAM
+* 16GiB RAM x 4 CPUS
 * AWS
 
 ::: {important}
@@ -222,7 +222,7 @@ Run the following commands to create a new instance with this configuration:
 
 ```bash
 curl -sLO https://raw.githubusercontent.com/matthewfeickert-talks/reproducible-cuda-workflows-with-pixi-scipy-2026/refs/heads/main/book/code/brev/setup_brev.sh
-brev create $(whoami)-scipy-2026 --type g7.2xlarge --startup-script @./setup_brev.sh
+brev create $(whoami)-scipy-2026 --type g6.xlarge --startup-script @./setup_brev.sh
 ```
 
 :::
@@ -239,7 +239,7 @@ You _can_ select the Brev instance configuration from the [Brev new environment 
 ::: {note}
 
 Any NVIDIA GPU that is of the Ampere or Ada GPU architecture (CUDA compute capability `8.x`) or the Blackwell architecture (CUDA compute capability `12.x`) will work for this tutorial.
-We are choosing to use the Blackwell RTX PRO 4500 for convenience.
+For [technical reasons](https://github.com/matthewfeickert-talks/reproducible-cuda-workflows-with-pixi-scipy-2026/issues/35), when working on Brev the Brev instances need to be AWS based.
 
 You can check the CUDA compute capability and the architecture of your NVIDIA GPU with the following commands
 
