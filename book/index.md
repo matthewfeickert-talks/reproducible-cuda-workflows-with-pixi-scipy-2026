@@ -2,6 +2,8 @@
 
 Taught at [SciPy 2026](https://www.scipy2026.scipy.org/) as a [tutorial](https://pretalx.com/scipy-2026/talk/9FQMMN/) on Monday July 13th, 2026
 
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.21829174.svg)](https://doi.org/10.5281/zenodo.21829174)
+
 ## Abstract
 
 Scientific researchers need reproducible software environments for complex applications that can run across heterogeneous computing platforms.

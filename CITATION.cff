@@ -13,7 +13,7 @@ authors:
   given-names: "Katrina"
   affiliation: "NVIDIA"
 title: "Reproducible CUDA Accelerated Workflows for Scientists with Pixi"
-# doi: 10.5281/zenodo.XXXXXXXX
+doi: 10.5281/zenodo.21829174
 repository-code: "https://github.com/matthewfeickert-talks/reproducible-cuda-workflows-with-pixi-scipy-2026/releases/tag/scipy-2026"
 url: "https://matthewfeickert-talks.github.io/reproducible-cuda-workflows-with-pixi-scipy-2026/"
 keywords:
