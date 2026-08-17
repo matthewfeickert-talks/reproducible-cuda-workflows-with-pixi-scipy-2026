@@ -21,8 +21,8 @@ cwd = "book"
 description = "Start a local server to preview the tutorial"
 
 [tasks.lint]
-description = "Run pre-commit on all files in the repository"
-cmd = "pre-commit run --all-files"
+description = "Run prek on all files in the repository"
+cmd = "prek run --all-files"
 
 [tasks.check-links]
 cmd = "lychee --no-progress book/*.md"
@@ -30,5 +30,5 @@ description = "Check links in the tutorial, might fail if no GITHUB_TOKEN is set
 
 [dependencies]
 mystmd = ">=1.10.1,<2"
-pre-commit = ">=4.6.0,<5"
+prek = ">=0.4.13,<0.5"
 lychee = ">=0.24.2,<0.25"
