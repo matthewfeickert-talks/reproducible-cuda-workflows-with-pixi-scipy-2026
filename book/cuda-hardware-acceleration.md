@@ -62,18 +62,18 @@ NumPy array 3.7416573867739413 on device: cpu
 CuPy array 3.7416573867739413 on device: <CUDA Device 0>
 ```
 
-## CuDF Example
+## cuDF Example
 
 There are other CUDA accelerated libraries for scientific Python as well.
 NVIDIA has created the [RAPIDS](https://rapids.ai/) data science collection of libraries for running end-to-end data science pipelines fully on GPUs with CUDA.
-One of the libraries is [CuDF](https://docs.rapids.ai/api/cudf/stable/) &mdash; a high level Python library for manipulating DataFrames on the GPU with Pandas-like idioms.
+One of the libraries is [cuDF](https://docs.rapids.ai/api/cudf/stable/) &mdash; a high level Python library for manipulating DataFrames on the GPU with Pandas-like idioms.
 
 ### Constructing the workspace
 
-CuDF is not available on conda-forge, but it is available on the Python Package Index (PyPI) as [`cudf-cu12`](https://pypi.org/project/cudf-cu12/) and on the [`rapidsai` conda channel on Anaconda.org as `cudf`](https://anaconda.org/rapidsai/cudf).
+cuDF is not available on conda-forge, but it is available on the Python Package Index (PyPI) as [`cudf-cu12`](https://pypi.org/project/cudf-cu12/) and on the [`rapidsai` conda channel on Anaconda.org as `cudf`](https://anaconda.org/rapidsai/cudf).
 We can install it through either method, but to keep working with conda package, we'll create a workspace that installs it from the `rapdsai` conda channel.
 
-:::: {tip} Construct the CuDF workspace
+:::: {tip} Construct the cuDF workspace
 
 ```{literalinclude} code/cudf-example/pixi.toml
 ```
@@ -88,7 +88,7 @@ pixi init ~/reproducible-cuda-scipy-2026/cudf-example
 cd ~/reproducible-cuda-scipy-2026/cudf-example
 ```
 
-As CuDF is available as a conda package only for `linux-64`, we'll just set that as a rich CUDA platform
+As cuDF is available as a conda package only for `linux-64`, we'll just set that as a rich CUDA platform
 
 ```toml
 platforms = [{ name = "linux-64-cuda", platform = "linux-64", cuda = "12" }]
@@ -103,7 +103,7 @@ pixi workspace channel add --prepend rapidsai
 ✔ Added rapidsai (https://conda.anaconda.org/rapidsai/)
 ```
 
-Then add the CuDF dependencies for the target platform of `linux-64` (`requests` and `aiohttp` are for an example).
+Then add the cuDF dependencies for the target platform of `linux-64` (`requests` and `aiohttp` are for an example).
 
 ```bash
 pixi add cudf requests aiohttp
@@ -119,7 +119,7 @@ and you should now have the workspace.
 :::
 ::::
 
-From this code snippet from a [user guide from NVIDIA](https://github.com/NVIDIA/accelerated-computing-hub/blob/2186298825b85ef38f08e779af7992b8d762289f/gpu-python-tutorial/6.0_cuDF.ipynb), we can now see that CuDF has very similar semantics and API to Pandas
+From this code snippet from a [user guide from NVIDIA](https://github.com/NVIDIA/accelerated-computing-hub/blob/2186298825b85ef38f08e779af7992b8d762289f/gpu-python-tutorial/6.0_cuDF.ipynb), we can now see that cuDF has very similar semantics and API to Pandas
 
 ```{literalinclude} code/cudf-example/cudf-example.py
 ```
@@ -137,7 +137,7 @@ Pandas DataFrame
 4  fa.m                 خانواده_کندی  2  0
 [1297577][09:12:17:950636][warning] Auto detection of compression type is supported only for file type buffers. For other buffer types, AUTO compression type assumes uncompressed input.
 
-CuDF DataFrame
+cuDF DataFrame
 :    en.m                   Article_51  1  0
 0    ja                       エレファモン  1  0
 1   ang                Flocc:Scīrung  1  0
@@ -146,7 +146,7 @@ CuDF DataFrame
 4  fa.m                 خانواده_کندی  2  0
 ```
 
-For time today, we won't cover CuDF fully, but there are [user guides for how to use CuDF](https://github.com/NVIDIA/accelerated-computing-hub/blob/2186298825b85ef38f08e779af7992b8d762289f/gpu-python-tutorial/6.0_cuDF.ipynb), as seen below.
+For time today, we won't cover cuDF fully, but there are [user guides for how to use cuDF](https://github.com/NVIDIA/accelerated-computing-hub/blob/2186298825b85ef38f08e779af7992b8d762289f/gpu-python-tutorial/6.0_cuDF.ipynb), as seen below.
 
 ::: {important} Further references
 
@@ -154,6 +154,6 @@ For time today, we won't cover CuDF fully, but there are [user guides for how to
 It contains many excellent examples.
 * In the tutorials session before this one (morning of 2025-07-07), [Katrina Riehl](https://github.com/nv-kriehl) taught [The Accelerated Python Developer's Toolbox](https://cfp.scipy.org/scipy2025/talk/KA7ZYR/) which covers CUDA and Python in-depth.
 * In the tutorials session before this one (morning of 2025-07-07), Allison Ding taught [Scaling Clustering for Big Data: Leveraging RAPIDS cuML](https://cfp.scipy.org/scipy2025/talk/WSSAU7/) which covers the cuML RAPIDS library.
-* The RAPIDS documentation has a [CuDF user guide](https://docs.rapids.ai/api/cudf/stable/user_guide/).
+* The RAPIDS documentation has [cuDF user documentation](https://docs.rapids.ai/api/cudf/stable/).
 
 :::
