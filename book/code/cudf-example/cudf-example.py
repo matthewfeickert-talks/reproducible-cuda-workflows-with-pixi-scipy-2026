@@ -8,9 +8,9 @@ data_url = "https://raw.githubusercontent.com/NVIDIA/accelerated-computing-hub/2
 df_cpu = pd.read_csv(data_url, sep=" ")
 print(f"Pandas DataFrame:\n {df_cpu.head()}")
 
-# also exist with CuDF
+# also exist with cuDF
 df_gpu = cudf.read_csv(data_url, sep=" ")
-print(f"\nCuDF DataFrame:\n {df_gpu.head()}")
+print(f"\ncuDF DataFrame:\n {df_gpu.head()}")
 
 # Label columns & drop unused column
 df_gpu.columns = ["project", "page", "requests", "x"]
